@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>The Six Persons — Премиальный фарфор</title>
+        <title>SIX PERSONS — Premium Tableware & Home Decor</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <script
             defer
@@ -12,1001 +12,1050 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
             rel="stylesheet"
         />
         <style>
-            /*
-               Font placeholder for Albertus Nova.
-               Note: To use the font from the provided link,
-               font files should be placed in a /fonts/ folder.
-            */
             @font-face {
                 font-family: "Albertus Nova";
                 src: local("Albertus Nova");
                 font-weight: normal;
                 font-style: normal;
             }
-
             :root {
-                --brand-navy: #0b0e1a;
-                --brand-gold: #c9a96e;
-                --brand-gold-light: #e8d4a8;
-                --brand-cream: #f9f7f2;
-                --brand-text: #1a1a1a;
+                --bg-gray: #f5f4f2;
+                --text-dark: #1a1a1a;
+                --text-muted: #717171;
             }
             body {
-                font-family: "DM Sans", sans-serif;
-                color: var(--brand-text);
-                background-color: #fff;
+                font-family: "Inter", sans-serif;
+                color: var(--text-dark);
+                background-color: #ffffff;
+                -webkit-font-smoothing: antialiased;
             }
-            h1,
-            h2,
-            h3,
-            h4,
             .serif {
                 font-family: "Cormorant Garamond", serif;
             }
             .logo-font {
                 font-family: "Albertus Nova", "Cormorant Garamond", serif;
-                font-weight: 500;
-                letter-spacing: 0.1em;
+                letter-spacing: 0.05em;
             }
-            .nav-link {
-                position: relative;
-                transition: color 0.3s ease;
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
             }
-            .nav-link::after {
-                content: "";
-                position: absolute;
-                width: 0;
-                height: 1px;
-                bottom: -2px;
-                left: 0;
-                background-color: var(--brand-gold);
-                transition: width 0.3s ease;
-            }
-            .nav-link:hover::after {
-                width: 100%;
-            }
-            .product-card:hover .product-image-alt {
-                opacity: 1;
-            }
-            .product-image-alt {
-                opacity: 0;
-                transition: opacity 0.5s ease;
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
             [x-cloak] {
                 display: none !important;
             }
+
+            /* Ensures product images with white backgrounds blend perfectly into the light grey boxes */
+            .product-cutout {
+                mix-blend-mode: multiply;
+            }
         </style>
     </head>
-    <body x-data="{ mobileMenu: false, cartOpen: false, searchOpen: false }">
-        <!-- Top Bar -->
-        <div
-            class="bg-[--brand-navy] text-white py-2 text-[10px] tracking-[0.2em] uppercase text-center"
-        >
-            Бесплатная доставка при заказе от 15 000 ₽
-        </div>
-
-        <!-- Header -->
+    <body
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+    >
+        <!-- Header (Westwing Minimal Style) -->
         <header
-            class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100"
+            class="fixed top-0 w-full z-50 transition-all duration-300 border-b"
+            :class="scrolled ? 'bg-white text-black border-gray-200 py-4' : 'bg-transparent text-white border-transparent py-6'"
         >
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-20">
-                    <!-- Left: Menu Toggle (Mobile) & Main Nav (Desktop) -->
-                    <div class="flex items-center">
-                        <button
-                            @click="mobileMenu = true"
-                            class="lg:hidden p-2 text-gray-600"
+            <div
+                class="max-w-[1600px] mx-auto px-6 md:px-10 flex justify-between items-start md:items-center flex-col md:flex-row gap-4 md:gap-0"
+            >
+                <!-- Left: Logo & Nav -->
+                <div class="flex flex-col gap-4">
+                    <a href="#" class="text-3xl logo-font uppercase"
+                        >Six Persons</a
+                    >
+                    <nav
+                        class="hidden md:flex gap-6 text-[10px] tracking-[0.1em] uppercase font-medium"
+                    >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Новинки</a
                         >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Каталог</a
+                        >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Бренды</a
+                        >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Outdoor</a
+                        >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Deals</a
+                        >
+                        <a href="#" class="hover:opacity-70 transition-opacity"
+                            >Сотрудничество</a
+                        >
+                    </nav>
+                </div>
+
+                <!-- Right: Search & Icons -->
+                <div
+                    class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end"
+                >
+                    <!-- Search Bar -->
+                    <div
+                        class="relative flex items-center border-b pb-1 w-full md:w-64"
+                        :class="scrolled ? 'border-gray-300' : 'border-white/50'"
+                    >
+                        <input
+                            type="text"
+                            placeholder="Поиск по товарам"
+                            class="bg-transparent border-none outline-none text-xs w-full placeholder-current opacity-80 focus:ring-0 px-0"
+                        />
+                        <button class="hover:opacity-70">
                             <svg
-                                class="w-6 h-6"
+                                class="w-4 h-4"
                                 fill="none"
                                 stroke="currentColor"
+                                stroke-width="1.5"
                                 viewBox="0 0 24 24"
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M4 6h16M4 12h16m-7 6h7"
-                                ></path>
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                />
                             </svg>
                         </button>
-                        <nav
-                            class="hidden lg:flex space-x-8 text-[11px] uppercase tracking-widest font-medium"
-                        >
-                            <a href="#" class="nav-link">Новинки</a>
-                            <a href="#" class="nav-link">Коллекции</a>
-                            <a href="#" class="nav-link">Сервировка</a>
-                            <a href="#" class="nav-link">Подарки</a>
-                        </nav>
                     </div>
 
-                    <!-- Center: Logo -->
-                    <div class="flex-shrink-0 flex flex-col items-center">
-                        <span
-                            class="text-2xl sm:text-3xl tracking-[0.15em] font-light uppercase logo-font"
-                            >Six Persons</span
-                        >
-                        <span
-                            class="text-[9px] italic tracking-[0.1em] text-[--brand-gold] -mt-1"
-                            >premium porcelain</span
-                        >
-                    </div>
-
-                    <!-- Right: Icons -->
-                    <div class="flex items-center space-x-5">
-                        <button
-                            @click="searchOpen = !searchOpen"
-                            class="text-gray-600 hover:text-[--brand-gold] transition"
-                        >
+                    <!-- Icons -->
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="hover:opacity-70 transition-opacity">
                             <svg
                                 class="w-5 h-5"
                                 fill="none"
                                 stroke="currentColor"
+                                stroke-width="1.5"
                                 viewBox="0 0 24 24"
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                ></path>
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                                />
                             </svg>
-                        </button>
-                        <!-- Account / LK -->
-                        <a
-                            href="#"
-                            class="text-gray-600 hover:text-[--brand-gold] transition flex items-center gap-1"
-                        >
-                            <svg
-                                class="w-5 h-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                ></path>
-                            </svg>
-                            <span
-                                class="hidden sm:inline text-[10px] uppercase tracking-tighter"
-                                >Кабинет</span
-                            >
                         </a>
                         <button
-                            @click="cartOpen = true"
-                            class="text-gray-600 hover:text-[--brand-gold] transition relative"
+                            @click="wishlistOpen = true"
+                            class="hover:opacity-70 transition-opacity relative"
                         >
                             <svg
                                 class="w-5 h-5"
                                 fill="none"
                                 stroke="currentColor"
+                                stroke-width="1.5"
                                 viewBox="0 0 24 24"
                             >
                                 <path
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
-                                    stroke-width="1.5"
-                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                                ></path>
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
                             </svg>
                             <span
-                                class="absolute -top-2 -right-2 bg-[--brand-gold] text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center"
-                                >2</span
+                                class="absolute -top-1 -right-2 text-[9px] bg-red-500 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center"
+                                >1</span
                             >
                         </button>
+                        <a href="#" class="hover:opacity-70 transition-opacity">
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                            </svg>
+                        </a>
                     </div>
-                </div>
-            </div>
-
-            <!-- Search Overlay -->
-            <div
-                x-show="searchOpen"
-                x-cloak
-                x-transition
-                class="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-8"
-            >
-                <div class="max-w-3xl mx-auto flex items-center">
-                    <input
-                        type="text"
-                        placeholder="Поиск по 1 200 товарам..."
-                        class="w-full text-2xl serif border-none focus:ring-0 placeholder-gray-300"
-                    />
-                    <button @click="searchOpen = false" class="text-gray-400">
-                        Закрыть
-                    </button>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
         <main>
-            <!-- Hero Section -->
-            <section class="relative h-[85vh] overflow-hidden bg-gray-100">
+            <!-- Hero Banner (Full width, text at bottom center) -->
+            <section class="relative w-full h-[85vh] min-h-[600px] bg-gray-900">
+                <!-- Using a premium interior/outdoor table setting image -->
                 <img
-                    src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2560"
-                    alt="Hero"
-                    class="absolute inset-0 w-full h-full object-cover"
+                    src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?q=80&w=2560"
+                    alt="Hero Banner"
+                    class="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
-                <div class="absolute inset-0 bg-black/20"></div>
+
                 <div
-                    class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center text-white"
+                    class="absolute inset-x-0 bottom-16 text-center text-white px-4"
                 >
-                    <span class="uppercase tracking-[0.3em] text-[10px] mb-6"
-                        >Новая коллекция 2026</span
+                    <p
+                        class="text-[11px] tracking-[0.15em] uppercase mb-4 opacity-90"
                     >
-                    <h1
-                        class="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight"
-                    >
-                        Вечная классика<br />в каждом прикосновении
-                    </h1>
-                    <div class="flex gap-4">
-                        <a
-                            href="#"
-                            class="bg-white text-[--brand-navy] px-10 py-4 text-[11px] uppercase tracking-widest font-bold hover:bg-[--brand-gold] hover:text-white transition-colors duration-500"
-                            >Смотреть каталог</a
-                        >
-                        <a
-                            href="#"
-                            class="border border-white text-white px-10 py-4 text-[11px] uppercase tracking-widest font-bold hover:bg-white hover:text-[--brand-navy] transition-colors duration-500"
-                            >О бренде</a
-                        >
-                    </div>
-                </div>
-            </section>
-
-            <!-- Categories Grid (Westwing Style) -->
-            <section class="max-w-7xl mx-auto px-4 py-24">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Large Tile -->
+                        Новое поступление
+                    </p>
+                    <h2 class="serif text-4xl md:text-6xl mb-6 font-medium">
+                        Business & Pleasure
+                    </h2>
                     <a
                         href="#"
-                        class="group relative md:col-span-2 overflow-hidden aspect-[16/9]"
+                        class="inline-block text-[11px] uppercase tracking-wider border-b border-white pb-1 hover:opacity-70 transition-opacity"
+                        >Смотреть каталог</a
                     >
-                        <img
-                            src="pictures/Снимок экрана 2026-06-17 в 17.26.54.png"
-                            alt="Tableware"
-                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
-                        <div
-                            class="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors"
-                        ></div>
-                        <div class="absolute bottom-10 left-10 text-white">
-                            <h3 class="text-4xl serif mb-2">
-                                Обеденные сервизы
-                            </h3>
-                            <span
-                                class="text-[10px] uppercase tracking-widest border-b border-white pb-1"
-                                >Купить сейчас</span
-                            >
-                        </div>
-                    </a>
-                    <!-- Small Tile -->
+                </div>
+            </section>
+
+            <!-- Categories Roulette -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 py-16">
+                <h3 class="serif text-2xl mb-8 text-gray-800">
+                    Популярные категории
+                </h3>
+
+                <div
+                    class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6 md:mx-0 md:px-0"
+                >
+                    <!-- Cat 1 -->
                     <a
                         href="#"
-                        class="group relative overflow-hidden aspect-square md:aspect-auto"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
                     >
-                        <img
-                            src="pictures/Снимок экрана 2026-06-17 в 17.26.56.png"
-                            alt="Tea"
-                            class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
                         <div
-                            class="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors"
-                        ></div>
-                        <div class="absolute bottom-10 left-10 text-white">
-                            <h3 class="text-3xl serif mb-2">Чай & Кофе</h3>
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
+                        >
                             <span
-                                class="text-[10px] uppercase tracking-widest border-b border-white pb-1"
-                                >Подробнее</span
+                                class="text-3xl font-light tracking-wide text-gray-700"
+                                >NEW</span
                             >
                         </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Новинки</span
+                        >
                     </a>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-8">
-                    <a href="#" class="group text-center">
+                    <!-- Cat 2 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
                         <div
-                            class="aspect-square overflow-hidden bg-gray-50 mb-4"
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
                         >
                             <img
-                                src="pictures/Снимок экрана 2026-06-17 в 17.27.01.png"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=400"
+                                alt="Furniture"
+                                class="product-cutout w-full h-full object-contain"
                             />
                         </div>
-                        <h4 class="serif text-xl">Декор и Вазы</h4>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Мебель</span
+                        >
                     </a>
-                    <a href="#" class="group text-center">
+                    <!-- Cat 3 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
                         <div
-                            class="aspect-square overflow-hidden bg-gray-50 mb-4"
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
                         >
                             <img
-                                src="pictures/Снимок экрана 2026-06-17 в 17.27.04.png"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://images.unsplash.com/photo-1614059045625-f37b1fb3a7cc?q=80&w=400"
+                                alt="Tableware"
+                                class="product-cutout w-full h-full object-contain"
                             />
                         </div>
-                        <h4 class="serif text-xl">Столовые приборы</h4>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Сервировка</span
+                        >
                     </a>
-                    <a href="#" class="group text-center">
+                    <!-- Cat 4 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
                         <div
-                            class="aspect-square overflow-hidden bg-gray-50 mb-4"
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
                         >
                             <img
-                                src="pictures/Снимок экрана 2026-06-17 в 17.27.11.png"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=400"
+                                alt="Lighting"
+                                class="product-cutout w-full h-full object-contain"
                             />
                         </div>
-                        <h4 class="serif text-xl">Подарки</h4>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Освещение</span
+                        >
                     </a>
-                    <a href="#" class="group text-center">
+                    <!-- Cat 5 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
                         <div
-                            class="aspect-square overflow-hidden bg-gray-50 mb-4"
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
                         >
                             <img
-                                src="pictures/Снимок экрана 2026-06-17 в 17.27.14.png"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                src="https://images.unsplash.com/photo-1584100936595-c0654b355040?q=80&w=400"
+                                alt="Textiles"
+                                class="product-cutout w-full h-full object-contain"
                             />
                         </div>
-                        <h4 class="serif text-xl">Текстиль</h4>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Текстиль</span
+                        >
+                    </a>
+                    <!-- Cat 6 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
+                        <div
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1544787210-28272550d508?q=80&w=400"
+                                alt="Kitchen"
+                                class="product-cutout w-full h-full object-contain"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Кухня</span
+                        >
+                    </a>
+                    <!-- Cat 7 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
+                        <div
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=400"
+                                alt="Decor"
+                                class="product-cutout w-full h-full object-contain"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Декор</span
+                        >
+                    </a>
+                    <!-- Cat 8 -->
+                    <a
+                        href="#"
+                        class="flex flex-col items-center gap-3 w-32 shrink-0 group"
+                    >
+                        <div
+                            class="w-full aspect-square bg-[#f5f4f2] flex items-center justify-center p-4 group-hover:bg-[#ebeae8] transition-colors"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1581783342308-f792dbdd27c5?q=80&w=400"
+                                alt="Gifts"
+                                class="product-cutout w-full h-full object-contain"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-600"
+                            >Подарки</span
+                        >
                     </a>
                 </div>
             </section>
 
-            <!-- Bestsellers Section (With Filtering Preview) -->
-            <section class="bg-[--brand-cream] py-24">
-                <div class="max-w-7xl mx-auto px-4">
+            <!-- Image Banner -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 pb-16">
+                <div
+                    class="relative w-full h-[500px] bg-gray-100 flex items-center justify-center overflow-hidden"
+                >
+                    <img
+                        src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2000"
+                        class="absolute inset-0 w-full h-full object-cover"
+                        alt="Banner"
+                    />
                     <div
-                        class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
+                        class="relative z-10 text-center text-white bg-black/20 p-8 w-full h-full flex flex-col justify-center items-center"
                     >
-                        <div>
-                            <span
-                                class="uppercase tracking-[0.2em] text-[10px] text-[--brand-gold] mb-4 block"
-                                >Популярно сейчас</span
-                            >
-                            <h2 class="text-5xl serif">
-                                Бестселлеры коллекции
-                            </h2>
-                        </div>
-
-                        <!-- Filtering Tab Preview -->
-                        <div
-                            class="flex space-x-6 text-[11px] uppercase tracking-widest font-medium border-b border-gray-200 pb-2"
-                        >
-                            <button
-                                class="text-[--brand-navy] border-b-2 border-[--brand-gold] -mb-[10px] pb-2"
-                            >
-                                Все
-                            </button>
-                            <button
-                                class="text-gray-400 hover:text-[--brand-navy] transition"
-                            >
-                                Aurelia Gold
-                            </button>
-                            <button
-                                class="text-gray-400 hover:text-[--brand-navy] transition"
-                            >
-                                Midnight Garden
-                            </button>
-                            <button
-                                class="text-gray-400 hover:text-[--brand-navy] transition"
-                            >
-                                Pure White
-                            </button>
-                        </div>
-                    </div>
-
-                    <div
-                        class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12"
-                    >
-                        <!-- Product 1 -->
-                        <div class="product-card group relative">
-                            <div
-                                class="relative aspect-[3/4] overflow-hidden bg-white mb-6"
-                            >
-                                <img
-                                    src="pictures/Снимок экрана 2026-06-17 в 17.27.19.png"
-                                    alt="Product"
-                                    class="absolute inset-0 w-full h-full object-cover"
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=800"
-                                    alt="Product Alt"
-                                    class="product-image-alt absolute inset-0 w-full h-full object-cover"
-                                />
-                                <button
-                                    class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
-                                >
-                                    Быстрый просмотр
-                                </button>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-[--brand-navy] text-white text-[9px] uppercase px-2 py-1 tracking-wider"
-                                        >New</span
-                                    >
-                                </div>
-                            </div>
-                            <div class="text-center px-2">
-                                <p
-                                    class="text-[10px] uppercase tracking-widest text-gray-400 mb-1"
-                                >
-                                    Aurelia Gold
-                                </p>
-                                <h3 class="serif text-lg mb-2">
-                                    Набор обеденный на 6 персон
-                                </h3>
-                                <p class="text-[13px] font-medium">42 500 ₽</p>
-                            </div>
-                        </div>
-
-                        <!-- Product 2 -->
-                        <div class="product-card group relative">
-                            <div
-                                class="relative aspect-[3/4] overflow-hidden bg-white mb-6"
-                            >
-                                <img
-                                    src="https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?q=80&w=800"
-                                    alt="Product"
-                                    class="absolute inset-0 w-full h-full object-cover"
-                                />
-                                <img
-                                    src="https://images.unsplash.com/photo-1616486341351-7095244f6d84?q=80&w=800"
-                                    alt="Product Alt"
-                                    class="product-image-alt absolute inset-0 w-full h-full object-cover"
-                                />
-                                <button
-                                    class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
-                                >
-                                    Быстрый просмотр
-                                </button>
-                            </div>
-                            <div class="text-center px-2">
-                                <p
-                                    class="text-[10px] uppercase tracking-widest text-gray-400 mb-1"
-                                >
-                                    Midnight Garden
-                                </p>
-                                <h3 class="serif text-lg mb-2">
-                                    Ваза коллекционная "Эдем"
-                                </h3>
-                                <p class="text-[13px] font-medium">18 900 ₽</p>
-                            </div>
-                        </div>
-
-                        <!-- Product 3 -->
-                        <div class="product-card group relative">
-                            <div
-                                class="relative aspect-[3/4] overflow-hidden bg-white mb-6"
-                            >
-                                <img
-                                    src="https://images.unsplash.com/photo-1622397333309-3056849bc70b?q=80&w=800"
-                                    alt="Product"
-                                    class="absolute inset-0 w-full h-full object-cover"
-                                />
-                                <button
-                                    class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
-                                >
-                                    Быстрый просмотр
-                                </button>
-                                <div class="absolute top-4 left-4">
-                                    <span
-                                        class="bg-[--brand-gold] text-white text-[9px] uppercase px-2 py-1 tracking-wider"
-                                        >-20%</span
-                                    >
-                                </div>
-                            </div>
-                            <div class="text-center px-2">
-                                <p
-                                    class="text-[10px] uppercase tracking-widest text-gray-400 mb-1"
-                                >
-                                    Pure White
-                                </p>
-                                <h3 class="serif text-lg mb-2">
-                                    Кофейная пара "Аристократ"
-                                </h3>
-                                <p class="text-[13px] font-medium">
-                                    <span
-                                        class="line-through text-gray-400 mr-2"
-                                        >8 500 ₽</span
-                                    >
-                                    6 800 ₽
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Product 4 -->
-                        <div class="product-card group relative">
-                            <div
-                                class="relative aspect-[3/4] overflow-hidden bg-white mb-6"
-                            >
-                                <img
-                                    src="https://images.unsplash.com/photo-1544787210-28272550d508?q=80&w=800"
-                                    alt="Product"
-                                    class="absolute inset-0 w-full h-full object-cover"
-                                />
-                                <button
-                                    class="absolute bottom-4 left-4 right-4 bg-white/90 py-3 text-[10px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0"
-                                >
-                                    Быстрый просмотр
-                                </button>
-                            </div>
-                            <div class="text-center px-2">
-                                <p
-                                    class="text-[10px] uppercase tracking-widest text-gray-400 mb-1"
-                                >
-                                    Signature
-                                </p>
-                                <h3 class="serif text-lg mb-2">
-                                    Чайный набор на 2 персоны
-                                </h3>
-                                <p class="text-[13px] font-medium">12 400 ₽</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-20">
+                        <h2 class="serif text-4xl mb-4">Cosy by Nature</h2>
                         <a
                             href="#"
-                            class="inline-block border border-[--brand-navy] px-12 py-4 text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[--brand-navy] hover:text-white transition-all duration-500"
-                            >Смотреть все 1 200 предметов</a
+                            class="text-xs uppercase tracking-widest border-b border-white pb-1"
+                            >Смотреть коллекцию</a
                         >
                     </div>
                 </div>
             </section>
 
-            <!-- Brand Ethos / Story -->
-            <section class="py-32 overflow-hidden">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="flex flex-col lg:flex-row items-center gap-20">
-                        <div class="lg:w-1/2 relative">
-                            <div
-                                class="relative z-10 aspect-[4/5] max-w-md mx-auto lg:ml-0"
+            <!-- Product Matrix -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 pb-24">
+                <h2 class="serif text-3xl mb-6 text-gray-800">
+                    Новинки каталога
+                </h2>
+
+                <!-- Quick Filters (Pills) -->
+                <div
+                    class="flex gap-2 mb-10 overflow-x-auto hide-scrollbar pb-2"
+                >
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Все товары
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Мебель
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Outdoor
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Сервировка
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Освещение
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Текстиль
+                    </button>
+                    <button
+                        class="border border-gray-300 px-4 py-1.5 text-[11px] uppercase tracking-wider hover:border-black transition-colors whitespace-nowrap"
+                    >
+                        Подарки
+                    </button>
+                </div>
+
+                <!-- Filter Bar -->
+                <div
+                    class="flex justify-between items-center text-[11px] text-gray-500 mb-6 uppercase tracking-wider"
+                >
+                    <button
+                        class="flex items-center gap-2 hover:text-black transition-colors"
+                    >
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1.5"
+                                d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                            />
+                        </svg>
+                        Фильтр
+                    </button>
+                    <span>1 200 Товаров</span>
+                </div>
+
+                <!-- Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12">
+                    <!-- Product Card 1 -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-10"
                             >
-                                <img
-                                    src="https://images.unsplash.com/photo-1520174691701-bc555a3404ca?q=80&w=1200"
-                                    alt="Craftsmanship"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="flex items-center gap-1.5 mb-2">
                             <div
-                                class="absolute -right-10 top-20 -z-0 hidden lg:block aspect-square w-64 bg-[--brand-cream]"
+                                class="w-3.5 h-3.5 bg-white border border-gray-300"
+                            ></div>
+                            <div
+                                class="w-3.5 h-3.5 bg-[#4a4a4a] border border-gray-300"
+                            ></div>
+                            <div
+                                class="w-3.5 h-3.5 bg-[#d2b48c] border border-gray-300"
+                            ></div>
+                            <span class="text-[10px] text-gray-400 ml-1"
+                                >+2</span
+                            >
+                        </div>
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Кресло Lounge Chair Teddy
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">
+                            Six Persons Collection
+                        </p>
+                        <p class="text-sm font-medium mt-2">145 900 ₽</p>
+                    </div>
+
+                    <!-- Product Card 2 -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-10"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1584100936595-c0654b355040?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div
+                                class="w-3.5 h-3.5 bg-[#5b7a8c] border border-gray-300"
+                            ></div>
+                            <div
+                                class="w-3.5 h-3.5 bg-[#dcdcdc] border border-gray-300"
                             ></div>
                         </div>
-                        <div class="lg:w-1/2 text-center lg:text-left">
-                            <span
-                                class="uppercase tracking-[0.3em] text-[10px] text-[--brand-gold] mb-6 block"
-                                >Философия бренда</span
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Подушка декоративная Sedna
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">
+                            Westwing Collection
+                        </p>
+                        <p class="text-sm font-medium mt-2">4 990 ₽</p>
+                    </div>
+
+                    <!-- Product Card 3 (With 'Ожидается' badge) -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-red-500 z-10"
                             >
-                            <h2
-                                class="text-5xl lg:text-6xl serif mb-10 leading-tight"
-                            >
-                                Искусство жить красиво начинается с деталей
-                            </h2>
-                            <p
-                                class="text-gray-500 leading-relaxed mb-10 max-w-lg mx-auto lg:ml-0"
-                            >
-                                "The Six Persons" — это не просто посуда. Это
-                                история о встречах, о тепле домашнего очага и о
-                                моментах, которые мы разделяем с самыми
-                                близкими. Наш фарфор создается для тех, кто
-                                ценит эстетику в каждом приеме пищи.
-                            </p>
-                            <ul
-                                class="space-y-6 text-[11px] uppercase tracking-[0.15em] font-medium text-[--brand-navy]"
-                            >
-                                <li
-                                    class="flex items-center justify-center lg:justify-start gap-4"
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
                                 >
-                                    <span
-                                        class="w-8 h-px bg-[--brand-gold]"
-                                    ></span>
-                                    Костяной фарфор высшей пробы
-                                </li>
-                                <li
-                                    class="flex items-center justify-center lg:justify-start gap-4"
-                                >
-                                    <span
-                                        class="w-8 h-px bg-[--brand-gold]"
-                                    ></span>
-                                    Ручная роспись золотом
-                                </li>
-                                <li
-                                    class="flex items-center justify-center lg:justify-start gap-4"
-                                >
-                                    <span
-                                        class="w-8 h-px bg-[--brand-gold]"
-                                    ></span>
-                                    Уникальный дизайн каждой коллекции
-                                </li>
-                            </ul>
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1614059045625-f37b1fb3a7cc?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
                         </div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div
+                                class="w-3.5 h-3.5 bg-white border border-gray-300"
+                            ></div>
+                        </div>
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Тарелка обеденная Kintsugi, 28 см
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">Seletti</p>
+                        <p class="text-sm font-medium mt-2">10 200 ₽</p>
+                        <!-- Client requested Stock Status UI -->
+                        <div class="mt-3 flex">
+                            <div
+                                class="inline-flex items-center gap-2 bg-gray-400 text-white text-[10px] uppercase tracking-wider px-3 py-1.5"
+                            >
+                                <span
+                                    class="w-1 h-1 rounded-full bg-white"
+                                ></span>
+                                Ожидается
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 4 (With 'Под заказ' badge) -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-10"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div
+                                class="w-3.5 h-3.5 bg-[#e4d5b7] border border-gray-300"
+                            ></div>
+                            <div
+                                class="w-3.5 h-3.5 bg-black border border-gray-300"
+                            ></div>
+                        </div>
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Лампа настольная Moka
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">Design House</p>
+                        <p class="text-sm font-medium mt-2">24 000 ₽</p>
+                        <div class="mt-3 flex">
+                            <div
+                                class="inline-flex items-center gap-2 border border-gray-300 text-gray-600 text-[10px] uppercase tracking-wider px-3 py-1.5"
+                            >
+                                <span
+                                    class="w-1 h-1 rounded-full bg-gray-400"
+                                ></span>
+                                Под заказ
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Card 5 -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-10"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1544787210-28272550d508?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div
+                                class="w-3.5 h-3.5 bg-white border border-gray-300"
+                            ></div>
+                        </div>
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Чайная пара BOUQUET
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">Bitossi Home</p>
+                        <p class="text-sm font-medium mt-2">6 450 ₽</p>
+                    </div>
+
+                    <!-- Product Card 6 -->
+                    <div class="group relative flex flex-col cursor-pointer">
+                        <div
+                            class="relative bg-[#f5f4f2] aspect-square mb-4 flex items-center justify-center p-8 overflow-hidden"
+                        >
+                            <button
+                                class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors z-10"
+                            >
+                                <svg
+                                    class="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="1.5"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                    />
+                                </svg>
+                            </button>
+                            <img
+                                src="https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?q=80&w=800"
+                                alt="Product"
+                                class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="flex items-center gap-1.5 mb-2">
+                            <div
+                                class="w-3.5 h-3.5 bg-[#8b5a2b] border border-gray-300"
+                            ></div>
+                        </div>
+                        <h4
+                            class="text-sm font-medium text-gray-900 leading-snug"
+                        >
+                            Деревянный поднос Artisan
+                        </h4>
+                        <p class="text-xs text-gray-500 mt-1">
+                            Six Persons Collection
+                        </p>
+                        <p class="text-sm font-medium mt-2">8 900 ₽</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Newsletter (Westwing Style) -->
-            <section class="bg-[--brand-navy] text-white py-24 text-center">
-                <div class="max-w-2xl mx-auto px-4">
-                    <h2 class="text-4xl serif mb-4">
-                        Вступите в Клуб Привилегий
-                    </h2>
-                    <p
-                        class="text-[12px] tracking-widest uppercase text-gray-400 mb-10"
+            <!-- Newsletter (Westwing Style Minimalist) -->
+            <section
+                class="max-w-[800px] mx-auto px-6 py-24 text-center border-t border-gray-200"
+            >
+                <h2 class="serif text-3xl mb-2">Subscribe to our newsletter</h2>
+                <p class="text-sm text-gray-500 mb-8">
+                    Get exclusive access to the latest design trends, curated
+                    offers and expert tips.
+                </p>
+                <form
+                    class="flex border-b border-gray-300 w-full max-w-md mx-auto pb-2"
+                >
+                    <input
+                        type="email"
+                        placeholder="Email Address"
+                        class="w-full bg-transparent border-none outline-none text-sm placeholder-gray-400 focus:ring-0 px-0"
+                    />
+                    <button
+                        type="submit"
+                        class="text-[10px] uppercase tracking-widest font-medium hover:opacity-70 transition-opacity"
                     >
-                        Скидка 10% на первый заказ и доступ к закрытым
-                        распродажам
-                    </p>
-                    <form class="flex flex-col sm:flex-row gap-4">
-                        <input
-                            type="email"
-                            placeholder="Ваш e-mail"
-                            class="flex-grow bg-white/5 border border-white/20 px-6 py-4 text-sm focus:border-[--brand-gold] focus:ring-0 transition"
-                        />
-                        <button
-                            class="bg-white text-[--brand-navy] px-10 py-4 text-[11px] uppercase tracking-[0.2em] font-bold hover:bg-[--brand-gold] hover:text-white transition-all"
-                        >
-                            Подписаться
-                        </button>
-                    </form>
-                </div>
+                        Submit
+                    </button>
+                </form>
             </section>
         </main>
 
-        <!-- Footer -->
-        <footer class="bg-white pt-24 pb-12 border-t border-gray-100">
-            <div class="max-w-7xl mx-auto px-4">
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20"
-                >
+        <footer class="bg-[#f5f4f2] pt-16 pb-8">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
                     <!-- Col 1 -->
                     <div>
                         <h5
-                            class="text-[11px] uppercase tracking-widest font-bold mb-8"
+                            class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900"
                         >
                             Покупателям
                         </h5>
-                        <ul class="space-y-4 text-sm text-gray-500">
+                        <ul class="space-y-4 text-xs text-gray-500">
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
                                     >Доставка и оплата</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
                                     >Обмен и возврат</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
-                                    >Гид по фарфору</a
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
+                                    >Подарочные сертификаты</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
                                     >Программа лояльности</a
                                 >
                             </li>
                         </ul>
                     </div>
-
                     <!-- Col 2 -->
                     <div>
                         <h5
-                            class="text-[11px] uppercase tracking-widest font-bold mb-8"
+                            class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900"
                         >
                             О компании
                         </h5>
-                        <ul class="space-y-4 text-sm text-gray-500">
+                        <ul class="space-y-4 text-xs text-gray-500">
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
-                                    >Наша история</a
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
+                                    >О бренде</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
-                                    >Магазины</a
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
+                                    >Наши магазины</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
-                                    >Партнерам</a
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
+                                    >Сотрудничество (B2B)</a
                                 >
                             </li>
                             <li>
-                                <a href="#" class="hover:text-[--brand-gold]"
+                                <a
+                                    href="#"
+                                    class="hover:text-black transition-colors"
                                     >Контакты</a
                                 >
                             </li>
                         </ul>
                     </div>
-
                     <!-- Col 3 -->
                     <div>
                         <h5
-                            class="text-[11px] uppercase tracking-widest font-bold mb-8"
+                            class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900"
                         >
                             Контакты
                         </h5>
-                        <ul class="space-y-4 text-sm text-gray-500">
+                        <ul class="space-y-4 text-xs text-gray-500">
                             <li>
                                 <a
                                     href="tel:+78005553535"
-                                    class="text-[--brand-navy] font-medium"
+                                    class="text-black font-medium text-sm"
                                     >+7 (800) 555-35-35</a
                                 >
                             </li>
-                            <li>пн-пт: 10:00 – 20:00</li>
-                            <li>сб-вс: 11:00 – 18:00</li>
+                            <li>Ежедневно с 10:00 до 21:00</li>
                             <li>
                                 <a
-                                    href="mailto:info@thesixpersons.ru"
-                                    class="hover:text-[--brand-gold]"
-                                    >info@thesixpersons.ru</a
+                                    href="mailto:hello@sixpersons.ru"
+                                    class="hover:text-black transition-colors underline"
+                                    >hello@sixpersons.ru</a
                                 >
                             </li>
                         </ul>
                     </div>
-
                     <!-- Col 4 -->
-                    <div>
-                        <div class="flex flex-col items-center lg:items-end">
-                            <span
-                                class="text-2xl tracking-[0.15em] font-light uppercase serif"
-                                >Six Persons</span
+                    <div class="flex flex-col items-start md:items-end">
+                        <a href="#" class="text-2xl logo-font uppercase mb-6"
+                            >Six Persons</a
+                        >
+                        <div class="flex gap-4 text-gray-500">
+                            <a
+                                href="#"
+                                class="hover:text-black transition-colors"
                             >
-                            <span
-                                class="text-[8px] italic tracking-[0.1em] text-[--brand-gold] mb-8"
-                                >premium porcelain</span
+                                <svg
+                                    class="w-5 h-5 fill-current"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                href="#"
+                                class="hover:text-black transition-colors"
                             >
-                            <div class="flex space-x-4">
-                                <a
-                                    href="#"
-                                    class="text-gray-400 hover:text-[--brand-navy] transition"
+                                <svg
+                                    class="w-5 h-5 fill-current"
+                                    viewBox="0 0 24 24"
                                 >
-                                    <svg
-                                        class="w-5 h-5 fill-current"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4zm6.406-11.845c.796 0 1.441.645 1.441 1.44s-.645 1.44-1.441 1.44c-.795 0-1.439-.645-1.439-1.44s.644-1.44 1.439-1.44z"
-                                        />
-                                    </svg>
-                                </a>
-                                <a
-                                    href="#"
-                                    class="text-gray-400 hover:text-[--brand-navy] transition"
-                                >
-                                    <svg
-                                        class="w-5 h-5 fill-current"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path
-                                            d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.992v-2.822c0-.672-.012-1.537-.936-1.537-.938 0-1.082.733-1.082 1.488v2.871h-1.99v-6h1.91v.82h.027c.265-.502.914-1.031 1.877-1.031 2.008 0 2.378 1.323 2.378 3.043v3.168z"
-                                        />
-                                    </svg>
-                                </a>
-                            </div>
+                                    <path
+                                        d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.992v-2.822c0-.672-.012-1.537-.936-1.537-.938 0-1.082.733-1.082 1.488v2.871h-1.99v-6h1.91v.82h.027c.265-.502.914-1.031 1.877-1.031 2.008 0 2.378 1.323 2.378 3.043v3.168z"
+                                    />
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div
-                    class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest"
+                    class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest"
                 >
-                    <p>&copy; 2026 The Six Persons. Все права защищены.</p>
-                    <div class="flex space-x-8">
-                        <a href="#" class="hover:text-[--brand-gold]"
-                            >Политика конфиденциальности</a
+                    <p>&copy; 2026 SIX PERSONS.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="hover:text-black transition-colors"
+                            >Privacy Policy</a
                         >
-                        <a href="#" class="hover:text-[--brand-gold]"
-                            >Публичная оферта</a
+                        <a href="#" class="hover:text-black transition-colors"
+                            >Terms of Service</a
                         >
-                    </div>
-                    <div class="flex space-x-4 opacity-50 grayscale">
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
-                            class="h-3"
-                            alt="Visa"
-                        />
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                            class="h-4"
-                            alt="Mastercard"
-                        />
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Mir-logo.svg"
-                            class="h-3"
-                            alt="Mir"
-                        />
                     </div>
                 </div>
             </div>
         </footer>
 
-        <!-- Side Cart Drawer -->
+        <!-- Wishlist Sidebar Demo (Includes Client Request: "Поделиться вишлистом") -->
         <div
-            x-show="cartOpen"
+            x-show="wishlistOpen"
             x-cloak
             class="fixed inset-0 z-[100] flex justify-end"
         >
             <div
-                x-show="cartOpen"
-                @click="cartOpen = false"
+                x-show="wishlistOpen"
+                @click="wishlistOpen = false"
                 x-transition.opacity
-                class="absolute inset-0 bg-black/40"
+                class="absolute inset-0 bg-black/30 backdrop-blur-sm"
             ></div>
             <div
-                x-show="cartOpen"
+                x-show="wishlistOpen"
                 x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="translate-x-full"
                 x-transition:enter-end="translate-x-0"
-                class="relative w-full max-w-md bg-white h-full shadow-2xl p-8 flex flex-col"
+                class="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col"
             >
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl serif">Корзина (2)</h2>
+                <div
+                    class="p-6 border-b border-gray-100 flex justify-between items-center"
+                >
+                    <h2 class="serif text-2xl">Избранное (1)</h2>
                     <button
-                        @click="cartOpen = false"
+                        @click="wishlistOpen = false"
                         class="text-gray-400 hover:text-black"
                     >
                         <svg
                             class="w-6 h-6"
                             fill="none"
                             stroke="currentColor"
+                            stroke-width="1.5"
                             viewBox="0 0 24 24"
                         >
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="1.5"
                                 d="M6 18L18 6M6 6l12 12"
-                            ></path>
+                            />
                         </svg>
                     </button>
                 </div>
 
-                <div class="flex-grow overflow-y-auto space-y-6">
-                    <!-- Cart Item -->
+                <div class="flex-grow overflow-y-auto p-6">
+                    <!-- Wishlist Item -->
                     <div class="flex gap-4">
-                        <div class="w-20 h-24 bg-gray-50 flex-shrink-0">
+                        <div
+                            class="w-24 h-24 bg-[#f5f4f2] flex items-center justify-center p-2 flex-shrink-0"
+                        >
                             <img
-                                src="https://images.unsplash.com/photo-1574635677531-1559492f2e51?q=80&w=200"
-                                class="w-full h-full object-cover"
+                                src="https://images.unsplash.com/photo-1614059045625-f37b1fb3a7cc?q=80&w=200"
+                                class="product-cutout w-full h-full object-contain"
                             />
                         </div>
-                        <div class="flex-grow">
-                            <h4 class="serif text-base">
-                                Обеденный сервиз Aurelia Gold
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h4 class="text-sm font-medium">
+                                Тарелка Kintsugi, 28 см
                             </h4>
-                            <p class="text-[10px] text-gray-400 mb-2">
-                                Набор на 6 персон
-                            </p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm font-medium"
-                                    >42 500 ₽</span
-                                >
-                                <div
-                                    class="flex items-center gap-3 border border-gray-100 px-2 py-1"
-                                >
-                                    <button class="text-gray-400">-</button>
-                                    <span class="text-xs">1</span>
-                                    <button class="text-gray-400">+</button>
-                                </div>
-                            </div>
+                            <p class="text-xs text-gray-500 mb-2">Seletti</p>
+                            <span class="text-sm font-medium">10 200 ₽</span>
                         </div>
-                    </div>
-                </div>
-
-                <div class="border-t border-gray-100 pt-8 mt-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <span
-                            class="text-sm uppercase tracking-widest text-gray-500"
-                            >Итого:</span
+                        <button
+                            class="text-gray-400 hover:text-red-500 h-fit mt-2"
                         >
-                        <span class="text-xl serif">42 500 ₽</span>
+                            <svg
+                                class="w-4 h-4"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                                />
+                            </svg>
+                        </button>
                     </div>
-                    <button
-                        class="w-full bg-[--brand-navy] text-white py-4 text-[11px] uppercase tracking-widest font-bold hover:bg-[--brand-gold] transition-all mb-4"
-                    >
-                        Оформить заказ
-                    </button>
-                    <button
-                        @click="cartOpen = false"
-                        class="w-full text-[10px] uppercase tracking-widest text-gray-400 font-bold hover:text-black transition-all"
-                    >
-                        Продолжить покупки
-                    </button>
                 </div>
-            </div>
-        </div>
 
-        <!-- Mobile Navigation Drawer -->
-        <div x-show="mobileMenu" x-cloak class="fixed inset-0 z-[100]">
-            <div
-                x-show="mobileMenu"
-                @click="mobileMenu = false"
-                x-transition.opacity
-                class="absolute inset-0 bg-black/40"
-            ></div>
-            <div
-                x-show="mobileMenu"
-                x-transition:enter="transition ease-out duration-300 transform"
-                x-transition:enter-start="-translate-x-full"
-                x-transition:enter-end="translate-x-0"
-                class="relative w-[85%] max-w-sm bg-white h-full shadow-2xl p-8"
-            >
-                <button @click="mobileMenu = false" class="mb-12">
-                    <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                <!-- "Share Wishlist" Feature implementation per client request -->
+                <div class="p-6 border-t border-gray-100 bg-gray-50">
+                    <button
+                        class="w-full bg-white border border-black text-black py-3 text-[11px] uppercase tracking-[0.1em] font-medium hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2"
                     >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                        <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
                             stroke-width="1.5"
-                            d="M6 18L18 6M6 6l12 12"
-                        ></path>
-                    </svg>
-                </button>
-                <nav class="flex flex-col space-y-8 text-xl serif">
-                    <a href="#" class="hover:text-[--brand-gold]">Новинки</a>
-                    <a href="#" class="hover:text-[--brand-gold]">Коллекции</a>
-                    <a href="#" class="hover:text-[--brand-gold]">Сервировка</a>
-                    <a href="#" class="hover:text-[--brand-gold]">Декор</a>
-                    <a href="#" class="hover:text-[--brand-gold]">Подарки</a>
-                </nav>
-                <div class="mt-20 pt-8 border-t border-gray-100">
-                    <a
-                        href="#"
-                        class="flex items-center gap-4 text-sm uppercase tracking-widest font-medium mb-6"
-                    >
-                        <svg
-                            class="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
                             viewBox="0 0 24 24"
                         >
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                            ></path>
+                                d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
+                            />
                         </svg>
-                        Личный кабинет
-                    </a>
-                    <a
-                        href="#"
-                        class="flex items-center gap-4 text-sm uppercase tracking-widest font-medium"
-                    >
-                        <svg
-                            class="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            ></path>
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="1.5"
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            ></path>
-                        </svg>
-                        Магазины
-                    </a>
+                        Поделиться вишлистом
+                    </button>
+                    <p class="text-[10px] text-center text-gray-500 mt-3">
+                        Отправьте публичную ссылку друзьям и близким
+                    </p>
                 </div>
             </div>
         </div>
