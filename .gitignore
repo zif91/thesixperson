@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+dist/
+*.log
+.env
+.idea/
+.vscode/
+files/
+design/
+photo_2025-12-04_00-43-40.jpg
