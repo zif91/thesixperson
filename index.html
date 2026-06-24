@@ -82,9 +82,11 @@
             >
                 <!-- Left: Logo & Nav -->
                 <div class="flex flex-col gap-6">
-                    <a href="index.html" class="text-4xl md:text-5xl logo-font uppercase tracking-widest font-bold"
-                        >Six Persons</a
-                    >
+                    <a href="index.html" class="block">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 32" class="h-8 md:h-9 w-auto" fill="currentColor">
+                            <text x="0" y="25" font-family="'Albertus Nova', 'Cormorant Garamond', serif" font-size="24" letter-spacing="0.12em" font-weight="500">SIX PERSONS</text>
+                        </svg>
+                    </a>
                     <nav
                         class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
                     >
@@ -228,70 +230,166 @@
                 </div>
             </section>
 
-            <!-- Popular Categories Grid (Full width & 2x Larger) -->
-            <section class="max-w-[1600px] mx-auto px-6 md:px-10 py-20 border-b border-gray-100">
-                <h3 class="serif text-3xl mb-12 text-gray-800 tracking-wide text-center md:text-left">
+            <!-- Popular Categories -->
+            <section class="max-w-[1600px] mx-auto py-16 border-b border-gray-100">
+                <h3 class="serif text-3xl mb-10 px-6 md:px-10 text-gray-800 tracking-wide text-left">
                     Популярные категории
                 </h3>
 
                 <div
-                    class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
+                    class="flex gap-5 overflow-x-auto hide-scrollbar pb-4 pl-0 pr-6 md:pr-10"
                 >
-                    <!-- Cat 1 -->
+                    <!-- Cat 1: Тарелки -->
                     <a
                         href="catalog.html"
-                        class="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
                     >
-                        <img
-                            src="https://images.unsplash.com/photo-1590794056226-79ef3a8147e1?q=80&w=800"
-                            alt="Новинки"
-                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
-                            <span class="text-xs uppercase tracking-[0.2em] text-white font-semibold">Новинки</span>
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/seletti/kintsugi/SLT008039/SLT008039_1.jpg.webp?resize=371x520"
+                                alt="Тарелки"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Тарелки</span
+                        >
                     </a>
-                    <!-- Cat 2 -->
+                    <!-- Cat 2: Чашки -->
                     <a
                         href="catalog.html"
-                        class="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
                     >
-                        <img
-                            src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=800"
-                            alt="Тарелки"
-                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
-                            <span class="text-xs uppercase tracking-[0.2em] text-white font-semibold">Тарелки</span>
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/seletti/kintsugi/SLT008001/SLT008001_1.JPG.webp?resize=371x520"
+                                alt="Чашки"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Чашки</span
+                        >
                     </a>
-                    <!-- Cat 3 -->
+                    <!-- Cat 3: Декор -->
                     <a
                         href="catalog.html"
-                        class="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
                     >
-                        <img
-                            src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800"
-                            alt="Бокалы"
-                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
-                            <span class="text-xs uppercase tracking-[0.2em] text-white font-semibold">Бокалы</span>
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/seletti/love-in-bloom/SLT009003/SLT009003_1.JPG.webp?resize=371x520"
+                                alt="Декор"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Декор</span
+                        >
                     </a>
-                    <!-- Cat 4 -->
+                    <!-- Cat 4: Чайники -->
                     <a
                         href="catalog.html"
-                        class="group relative block aspect-[3/4] overflow-hidden bg-gray-100"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
                     >
-                        <img
-                            src="https://images.unsplash.com/photo-1578500494198-246f612d3b3d?q=80&w=800"
-                            alt="Декор & Вазы"
-                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6">
-                            <span class="text-xs uppercase tracking-[0.2em] text-white font-semibold">Декор & Вазы</span>
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/portmeirion/botanic-garden/PR1190/PR1190_1.JPG.webp?resize=371x520"
+                                alt="Чайники"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
                         </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Чайники</span
+                        >
+                    </a>
+                    <!-- Cat 5: Кувшины -->
+                    <a
+                        href="catalog.html"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
+                    >
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/portmeirion/botanic-garden/PR1111/PR1111_1.jpg.webp?resize=371x520"
+                                alt="Кувшины"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Кувшины</span
+                        >
+                    </a>
+                    <!-- Cat 6: Блюда -->
+                    <a
+                        href="catalog.html"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
+                    >
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://cdn.rw-back.ru/images/products/seletti/hybrid/SLT007053/SLT007053_1.JPG.webp?resize=371x520"
+                                alt="Блюда"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Блюда</span
+                        >
+                    </a>
+                    <!-- Cat 7: Бокалы -->
+                    <a
+                        href="catalog.html"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
+                    >
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1584100936595-c0654b355040?q=80&w=400"
+                                alt="Бокалы"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Бокалы</span
+                        >
+                    </a>
+                    <!-- Cat 8: Приборы -->
+                    <a
+                        href="catalog.html"
+                        class="flex flex-col items-center gap-2 shrink-0 group w-[75px]"
+                    >
+                        <div
+                            class="w-[75px] h-[75px] bg-[#f5f4f2] flex items-center justify-center overflow-hidden border border-gray-100"
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1544787210-28272550d508?q=80&w=400"
+                                alt="Приборы"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                        <span
+                            class="text-[10px] uppercase tracking-wider text-gray-500 text-center font-medium leading-tight group-hover:text-black transition-colors"
+                            >Приборы</span
+                        >
                     </a>
                 </div>
             </section>
@@ -564,9 +662,11 @@
                     </div>
                     <!-- Col 4 -->
                     <div class="flex flex-col items-start md:items-end">
-                        <a href="index.html" class="text-2xl logo-font uppercase mb-6 font-bold"
-                            >Six Persons</a
-                        >
+                        <a href="index.html" class="block text-black mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 32" class="h-7 w-auto" fill="currentColor">
+                                <text x="0" y="25" font-family="'Albertus Nova', 'Cormorant Garamond', serif" font-size="24" letter-spacing="0.12em" font-weight="500">SIX PERSONS</text>
+                            </svg>
+                        </a>
                         <div class="flex gap-4 text-gray-500">
                             <a
                                 href="#"
