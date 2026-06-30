@@ -995,7 +995,15 @@
                 const collection = params.get('collection');
                 
                 if (brand || collection) {
+                    // Hide editorial block when filter is active
+                    const editorial = document.querySelector('.grid > .col-span-2');
+                    if (editorial) {
+                        editorial.style.display = 'none';
+                    }
+
                     const cards = document.querySelectorAll('.grid > a');
+                    let visibleCount = 0;
+
                     cards.forEach(card => {
                         let show = true;
                         
@@ -1018,9 +1026,23 @@
                             else if (colLower === 'outdoor zen' && !titleText.toLowerCase().includes('kintsugi') && !titleText.toLowerCase().includes('oriente')) show = false;
                         }
                         
-                        card.style.display = show ? 'flex' : 'none';
+                        if (show) {
+                            card.style.display = 'flex';
+                            visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
                     });
                     
+                    // Show placeholder if no items match
+                    if (visibleCount === 0) {
+                        const grid = document.querySelector('.grid');
+                        const noProducts = document.createElement('div');
+                        noProducts.className = 'col-span-full py-24 text-center text-gray-400 text-xs uppercase tracking-widest';
+                        noProducts.textContent = 'Нет товаров этого бренда в каталоге';
+                        grid.appendChild(noProducts);
+                    }
+
                     const titleEl = document.querySelector('h1') || document.querySelector('h2');
                     if (titleEl) {
                         if (brand) titleEl.textContent = `Каталог: ${brand}`;
