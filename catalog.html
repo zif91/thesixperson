@@ -94,8 +94,11 @@
                         <a href="catalog.html" class="border-b border-black pb-1"
                             >Каталог</a
                         >
-                        <a href="catalog.html?category=brands" class="hover:opacity-70 transition-opacity"
+                        <a href="brands.html" class="hover:opacity-70 transition-opacity"
                             >Бренды</a
+                        >
+                        <a href="collections.html" class="hover:opacity-70 transition-opacity"
+                            >Коллекции</a
                         >
                         <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity"
                             >Outdoor</a
@@ -985,5 +988,46 @@
                 </form>
             </div>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const params = new URLSearchParams(window.location.search);
+                const brand = params.get('brand');
+                const collection = params.get('collection');
+                
+                if (brand || collection) {
+                    const cards = document.querySelectorAll('.grid > a');
+                    cards.forEach(card => {
+                        let show = true;
+                        
+                        if (brand) {
+                            const brandText = card.querySelector('p.text-xs.text-gray-500')?.textContent || '';
+                            if (brandText.toLowerCase().trim() !== brand.toLowerCase().trim()) {
+                                show = false;
+                            }
+                        }
+                        
+                        if (collection) {
+                            const titleText = card.querySelector('h4')?.textContent || '';
+                            const brandText = card.querySelector('p.text-xs.text-gray-500')?.textContent || '';
+                            
+                            const colLower = collection.toLowerCase().trim();
+                            if (colLower === 'kintsugi' && !titleText.toLowerCase().includes('kintsugi')) show = false;
+                            else if (colLower === 'oriente italiano' && !titleText.toLowerCase().includes('oriente italiano')) show = false;
+                            else if (colLower === 'ecume' && !titleText.toLowerCase().includes('ecume')) show = false;
+                            else if (colLower.includes('wrendale') && !brandText.toLowerCase().includes('worcester')) show = false;
+                            else if (colLower === 'outdoor zen' && !titleText.toLowerCase().includes('kintsugi') && !titleText.toLowerCase().includes('oriente')) show = false;
+                        }
+                        
+                        card.style.display = show ? 'flex' : 'none';
+                    });
+                    
+                    const titleEl = document.querySelector('h1') || document.querySelector('h2');
+                    if (titleEl) {
+                        if (brand) titleEl.textContent = `Каталог: ${brand}`;
+                        else if (collection) titleEl.textContent = `Коллекция: ${collection}`;
+                    }
+                }
+            });
+        </script>
     </body>
 </html>

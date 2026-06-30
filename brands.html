@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Бренды — SIX PERSONS</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            @font-face {
+                font-family: "Albertus Nova";
+                src: local("Albertus Nova");
+                font-weight: normal;
+                font-style: normal;
+            }
+            :root {
+                --bg-gray: #f5f4f2;
+                --text-dark: #1a1a1a;
+                --text-muted: #717171;
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                color: var(--text-dark);
+                background-color: #ffffff;
+                -webkit-font-smoothing: antialiased;
+            }
+            .serif {
+                font-family: "Cormorant Garamond", serif;
+            }
+            .logo-font {
+                font-family: "Albertus Nova", "Cormorant Garamond", serif;
+                letter-spacing: 0.05em;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            [x-cloak] {
+                display: none !important;
+            }
+            .product-cutout {
+                mix-blend-mode: multiply;
+            }
+        </style>
+    </head>
+    <body
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false, showroomOpen: false, loyaltyOpen: false }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+    >
+        <!-- Header (Westwing Minimal Style) -->
+        <header
+            class="fixed top-0 w-full z-50 transition-all duration-300 border-b bg-white text-black border-gray-200 py-5"
+        >
+            <div
+                class="max-w-[1600px] mx-auto px-6 md:px-10 flex justify-between items-start md:items-center flex-col md:flex-row gap-5 md:gap-0"
+            >
+                <!-- Left: Logo & Nav -->
+                <div class="flex flex-col gap-6">
+                    <a href="index.html" class="block">
+                        <img src="logo-01.svg" class="h-8 md:h-9 w-auto" alt="SIX PERSONS" />
+                    </a>
+                    <nav
+                        class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
+                    >
+                        <a href="index.html" class="hover:opacity-70 transition-opacity">Главная</a>
+                        <a href="catalog.html" class="hover:opacity-70 transition-opacity">Каталог</a>
+                        <a href="brands.html" class="border-b border-black pb-1">Бренды</a>
+                        <a href="collections.html" class="hover:opacity-70 transition-opacity">Коллекции</a>
+                        <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity">Outdoor</a>
+                        <a href="catalog.html?category=deals" class="hover:opacity-70 transition-opacity">Deals</a>
+                        <a href="collab.html" class="hover:opacity-70 transition-opacity">Сотрудничество</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Search & Icons -->
+                <div
+                    class="flex items-center gap-10 w-full md:w-auto justify-between md:justify-end"
+                >
+                    <div class="relative flex-grow md:flex-grow-0">
+                        <input
+                            type="text"
+                            placeholder="Найти товары"
+                            class="bg-[#f5f4f2] text-xs uppercase tracking-wider px-4 py-2.5 w-full md:w-64 rounded-none outline-none pr-10 focus:ring-1 focus:ring-gray-300"
+                        />
+                        <svg
+                            class="w-4 h-4 text-gray-400 absolute right-3 top-3"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                        </svg>
+                    </div>
+
+                    <div class="flex items-center gap-6">
+                        <!-- Wishlist Trigger -->
+                        <button
+                            @click="wishlistOpen = true"
+                            class="hover:opacity-70 transition-opacity relative"
+                        >
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
+                            </svg>
+                            <span
+                                class="absolute -top-1 -right-2 text-[9px] bg-red-500 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center"
+                                >1</span
+                            >
+                        </button>
+                        <a href="cart.html" class="hover:opacity-70 transition-opacity">
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="pt-32 pb-24 max-w-[1600px] mx-auto px-6 md:px-10">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-400 mb-12">
+                <a href="index.html" class="hover:text-black transition-colors">Главная</a>
+                <span>/</span>
+                <span class="text-black">Бренды</span>
+            </div>
+
+            <!-- Page Title -->
+            <h1 class="serif text-4xl md:text-5xl font-medium text-gray-900 mb-12">Бренды</h1>
+
+            <!-- Alphabetical Directory with Alpine Filtering -->
+            <div
+                x-data="{
+                    selectedCategory: 'all',
+                    searchQuery: '',
+                    brands: [
+                        { name: '&Klevering', letter: '&', categories: ['посуда', 'интерьер'] },
+                        { name: 'Alessi', letter: 'A', categories: ['посуда', 'интерьер'] },
+                        { name: 'Amefa', letter: 'A', categories: ['посуда'] },
+                        { name: 'Amitile', letter: 'A', categories: ['текстиль'] },
+                        { name: 'Arne Jacobsen', letter: 'A', categories: ['интерьер'] },
+                        { name: 'Arthur Price', letter: 'A', categories: ['посуда'] },
+                        { name: 'Avolt', letter: 'A', categories: ['интерьер'] },
+                        { name: 'AYTM', letter: 'A', categories: ['интерьер'] },
+                        { name: 'Bitossi Home', letter: 'B', categories: ['посуда'] },
+                        { name: 'Bjorn Wiinblad', letter: 'B', categories: ['посуда', 'интерьер'] },
+                        { name: 'Blomsterbergs', letter: 'B', categories: ['посуда'] },
+                        { name: 'Capdeco', letter: 'C', categories: ['посуда'] },
+                        { name: 'Casa Bugatti', letter: 'C', categories: ['посуда'] },
+                        { name: 'Chando', letter: 'C', categories: ['интерьер'] },
+                        { name: 'Cristal de Paris', letter: 'C', categories: ['посуда'] },
+                        { name: 'Degrenne', letter: 'D', categories: ['посуда'] },
+                        { name: 'Dibbern', letter: 'D', categories: ['посуда'] },
+                        { name: 'Edzard', letter: 'E', categories: ['посуда', 'интерьер'] },
+                        { name: 'Gien', letter: 'G', categories: ['посуда'] },
+                        { name: 'Ginori 1735', letter: 'G', categories: ['посуда', 'интерьер'] },
+                        { name: 'Polspotten', letter: 'P', categories: ['посуда', 'интерьер'] },
+                        { name: 'Seletti', letter: 'S', categories: ['посуда', 'интерьер'] }
+                    ],
+                    get filteredGroups() {
+                        let filtered = this.brands.filter(b => {
+                            const matchesCat = this.selectedCategory === 'all' || b.categories.includes(this.selectedCategory);
+                            const matchesSearch = b.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+                            return matchesCat && matchesSearch;
+                        });
+                        let groups = {};
+                        filtered.forEach(b => {
+                            if (!groups[b.letter]) {
+                                groups[b.letter] = [];
+                            }
+                            groups[b.letter].push(b);
+                        });
+                        return Object.keys(groups).sort().map(key => ({
+                            letter: key,
+                            brands: groups[key].sort((a,b) => a.name.localeCompare(b.name))
+                        }));
+                    }
+                }"
+                class="space-y-10"
+            >
+                <!-- Filter Tabs & Quick Search -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-gray-100 pb-6">
+                    <div class="flex flex-wrap gap-8 text-[11px] uppercase tracking-wider font-semibold">
+                        <button
+                            @click="selectedCategory = 'all'"
+                            :class="selectedCategory === 'all' ? 'border-b-2 border-black text-black' : 'text-gray-400 hover:text-black'"
+                            class="pb-2 transition-colors"
+                        >
+                            Все
+                        </button>
+                        <button
+                            @click="selectedCategory = 'посуда'"
+                            :class="selectedCategory === 'посуда' ? 'border-b-2 border-black text-black' : 'text-gray-400 hover:text-black'"
+                            class="pb-2 transition-colors"
+                        >
+                            Посуда
+                        </button>
+                        <button
+                            @click="selectedCategory = 'текстиль'"
+                            :class="selectedCategory === 'текстиль' ? 'border-b-2 border-black text-black' : 'text-gray-400 hover:text-black'"
+                            class="pb-2 transition-colors"
+                        >
+                            Текстиль
+                        </button>
+                        <button
+                            @click="selectedCategory = 'интерьер'"
+                            :class="selectedCategory === 'интерьер' ? 'border-b-2 border-black text-black' : 'text-gray-400 hover:text-black'"
+                            class="pb-2 transition-colors"
+                        >
+                            Интерьер
+                        </button>
+                    </div>
+
+                    <div class="relative w-full md:w-72">
+                        <input
+                            type="text"
+                            x-model="searchQuery"
+                            placeholder="Поиск по названию"
+                            class="w-full border border-gray-200 px-4 py-2 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black"
+                        />
+                        <template x-if="searchQuery">
+                            <button @click="searchQuery = ''" class="absolute right-3 top-2.5 text-gray-400 hover:text-black">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Grid Groups -->
+                <div class="divide-y divide-gray-100">
+                    <template x-for="group in filteredGroups" :key="group.letter">
+                        <div class="grid grid-cols-1 md:grid-cols-4 py-10 items-start">
+                            <div class="text-3xl font-serif font-light text-gray-900 mb-6 md:mb-0" x-text="group.letter"></div>
+                            <div class="md:col-span-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-8">
+                                <template x-for="brand in group.brands" :key="brand.name">
+                                    <a
+                                        :href="'brand.html?brand=' + encodeURIComponent(brand.name)"
+                                        class="text-xs uppercase tracking-wider text-gray-600 hover:text-black transition-colors py-1 hover:underline"
+                                        x-text="brand.name"
+                                    ></a>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    
+                    <!-- No Results -->
+                    <template x-if="filteredGroups.length === 0">
+                        <div class="py-16 text-center text-gray-400 text-xs uppercase tracking-widest">
+                            Бренды не найдены
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-[#f5f4f2] pt-16 pb-8 border-t border-gray-200">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <!-- Col 1 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Покупателям</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="delivery.html" class="hover:text-black transition-colors">Доставка и оплата</a></li>
+                            <li><a href="returns.html" class="hover:text-black transition-colors">Обмен и возврат</a></li>
+                            <li><a href="giftcards.html" class="hover:text-black transition-colors">Подарочные сертификаты</a></li>
+                            <li><a href="#" @click.prevent="loyaltyOpen = true" class="hover:text-black transition-colors">Программа лояльности</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 2 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">О компании</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="about.html" class="hover:text-black transition-colors">О бренде</a></li>
+                            <li><a href="contacts.html#stores" class="hover:text-black transition-colors">Наши магазины</a></li>
+                            <li><a href="collab.html" class="hover:text-black transition-colors">Сотрудничество (B2B)</a></li>
+                            <li><a href="contacts.html" class="hover:text-black transition-colors">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 3 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Контакты</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="tel:+78005553535" class="text-black font-medium text-sm">+7 (800) 555-35-35</a></li>
+                            <li>Ежедневно с 10:00 до 21:00</li>
+                            <li><a href="mailto:hello@sixpersons.ru" class="hover:text-black transition-colors underline">hello@sixpersons.ru</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 4 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Бутик SIX PERSONS</h5>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Москва, ул. Большая Никитская, 24/1с5<br />
+                            Ежедневно с 10:00 до 22:00
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest">
+                    <p>&copy; 2026 SIX PERSONS.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-black transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Wishlist Drawer -->
+        <div
+            x-show="wishlistOpen"
+            x-cloak
+            class="fixed inset-0 z-[100] flex justify-end"
+        >
+            <div
+                x-show="wishlistOpen"
+                @click="wishlistOpen = false"
+                x-transition.opacity
+                class="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            ></div>
+            <div
+                x-show="wishlistOpen"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="translate-x-full"
+                x-transition:enter-end="translate-x-0"
+                class="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10"
+            >
+                <div class="p-6 border-b border-gray-100 flex justify-between items-center text-black">
+                    <h2 class="serif text-2xl">Избранное (1)</h2>
+                    <button @click="wishlistOpen = false" class="text-gray-400 hover:text-black">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex-grow overflow-y-auto p-6 text-black">
+                    <div class="flex gap-4">
+                        <div class="w-24 h-24 bg-[#f5f4f2] flex items-center justify-center p-2 flex-shrink-0">
+                            <img src="pictures/img1.png" class="product-cutout w-full h-full object-contain" />
+                        </div>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h4 class="text-sm font-medium">Тарелка Kintsugi, 28 см</h4>
+                            <p class="text-xs text-gray-500 mb-2">Seletti</p>
+                            <span class="text-sm font-medium">10 200 ₽</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500 h-fit mt-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 border-t border-gray-100 bg-gray-50">
+                    <button class="w-full bg-white border border-black text-black py-3 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                        </svg>
+                        Поделиться вишлистом
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Showroom Booking Modal -->
+        <div x-show="showroomOpen" x-cloak class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <div x-show="showroomOpen" @click="showroomOpen = false" x-transition.opacity class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            <div x-show="showroomOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="relative bg-white w-full max-w-lg p-8 md:p-12 shadow-2xl z-10 space-y-6 text-black">
+                <button @click="showroomOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="text-center">
+                    <h2 class="serif text-2xl md:text-3xl font-medium">Запись в Шоурум</h2>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wider">Индивидуальный подбор сервировки</p>
+                </div>
+                <form @submit.prevent="alert('Вы успешно записаны в шоурум! Мы свяжемся с вами для подтверждения времени.'); showroomOpen = false;" class="space-y-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Ваше имя *</label>
+                        <input type="text" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Номер телефона *</label>
+                        <input type="tel" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Дата *</label>
+                            <input type="date" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Время *</label>
+                            <select required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black appearance-none cursor-pointer">
+                                <option>10:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 20:00</option>
+                                <option>20:00 - 22:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Шоурум *</label>
+                        <select required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black appearance-none cursor-pointer">
+                            <option>Москва, ул. Большая Никитская, 24</option>
+                            <option>Санкт-Петербург, Невский проспект, 44</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-[#1a1a1a] text-white py-3.5 text-xs uppercase tracking-wider font-semibold hover:bg-black transition-colors rounded-none mt-2">
+                        Забронировать визит
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loyalty Club Modal -->
+        <div x-show="loyaltyOpen" x-cloak class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <div x-show="loyaltyOpen" @click="loyaltyOpen = false" x-transition.opacity class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            <div x-show="loyaltyOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="relative bg-white w-full max-w-lg p-8 md:p-12 shadow-2xl z-10 space-y-6 text-black">
+                <button @click="loyaltyOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="text-center">
+                    <h2 class="serif text-2xl md:text-3xl font-medium">Клуб привилегий</h2>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wider">Присоединяйтесь к SIX PERSONS Club</p>
+                </div>
+                <div class="text-xs text-gray-500 font-light space-y-2 leading-relaxed text-center max-w-sm mx-auto">
+                    Членство в клубе дает доступ к закрытым распродажам, скидке 10% на первый заказ и приглашениям на закрытые презентации коллекций в шоуруме.
+                </div>
+                <form @submit.prevent="alert('Добро пожаловать в клуб SIX PERSONS! Ваш промокод WELCOME10 на скидку 10% уже активен.'); loyaltyOpen = false;" class="space-y-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Ваше имя *</label>
+                        <input type="text" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Email Address *</label>
+                        <input type="email" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Номер телефона *</label>
+                        <input type="tel" required placeholder="+7" class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <button type="submit" class="w-full bg-[#1a1a1a] text-white py-3.5 text-xs uppercase tracking-wider font-semibold hover:bg-black transition-colors rounded-none mt-2">
+                        Вступить в клуб
+                    </button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
