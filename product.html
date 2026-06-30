@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Тарелка Kintsugi, 28 см — SIX PERSONS</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            @font-face {
+                font-family: "Albertus Nova";
+                src: local("Albertus Nova");
+                font-weight: normal;
+                font-style: normal;
+            }
+            :root {
+                --bg-gray: #f5f4f2;
+                --text-dark: #1a1a1a;
+                --text-muted: #717171;
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                color: var(--text-dark);
+                background-color: #ffffff;
+                -webkit-font-smoothing: antialiased;
+            }
+            .serif {
+                font-family: "Cormorant Garamond", serif;
+            }
+            .logo-font {
+                font-family: "Albertus Nova", "Cormorant Garamond", serif;
+                letter-spacing: 0.05em;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            [x-cloak] {
+                display: none !important;
+            }
+            .product-cutout {
+                mix-blend-mode: multiply;
+            }
+        </style>
+    </head>
+    <body
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false, cartCount: 1 }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+    >
+        <!-- Header (Westwing Minimal Style) -->
+        <header
+            class="fixed top-0 w-full z-50 transition-all duration-300 border-b bg-white text-black border-gray-200 py-5"
+        >
+            <div
+                class="max-w-[1600px] mx-auto px-6 md:px-10 flex justify-between items-start md:items-center flex-col md:flex-row gap-5 md:gap-0"
+            >
+                <!-- Left: Logo & Nav -->
+                <div class="flex flex-col gap-6">
+                    <a href="index.html" class="block">
+                        <img src="logo-01.svg" class="h-8 md:h-9 w-auto" alt="SIX PERSONS" />
+                    </a>
+                    <nav
+                        class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
+                    >
+                        <a href="index.html" class="hover:opacity-70 transition-opacity">Главная</a>
+                        <a href="catalog.html" class="hover:opacity-70 transition-opacity">Каталог</a>
+                        <a href="catalog.html?category=brands" class="hover:opacity-70 transition-opacity">Бренды</a>
+                        <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity">Outdoor</a>
+                        <a href="catalog.html?category=deals" class="hover:opacity-70 transition-opacity">Deals</a>
+                        <a href="collab.html" class="hover:opacity-70 transition-opacity">Сотрудничество</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Search & Icons -->
+                <div
+                    class="flex items-center gap-10 w-full md:w-auto justify-between md:justify-end"
+                >
+                    <!-- Search Bar -->
+                    <div
+                        class="relative flex items-center border-b pb-1.5 w-full md:w-72 border-gray-300"
+                    >
+                        <input
+                            type="text"
+                            placeholder="Поиск по товарам"
+                            class="bg-transparent border-none outline-none text-sm w-full placeholder-current opacity-80 focus:ring-0 px-0"
+                        />
+                        <button class="hover:opacity-70">
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Icons -->
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="hover:opacity-70 transition-opacity">
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                                />
+                            </svg>
+                        </a>
+                        <button
+                            @click="wishlistOpen = true"
+                            class="hover:opacity-70 transition-opacity relative"
+                        >
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
+                            </svg>
+                            <span
+                                class="absolute -top-1 -right-2 text-[9px] bg-red-500 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center"
+                                >1</span
+                            >
+                        </button>
+                        <a href="cart.html" class="hover:opacity-70 transition-opacity relative">
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                            </svg>
+                            <span
+                                x-text="cartCount"
+                                class="absolute -top-1 -right-2 text-[9px] bg-black text-white w-3.5 h-3.5 rounded-full flex items-center justify-center"
+                                >1</span
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="pt-32">
+            <!-- Breadcrumbs -->
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10 py-6 text-xs text-gray-400 uppercase tracking-widest">
+                <a href="index.html" class="hover:text-black transition-colors">Главная</a>
+                <span class="mx-2">/</span>
+                <a href="catalog.html" class="hover:text-black transition-colors">Каталог</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-900">Тарелки</span>
+            </div>
+
+            <!-- Product Details Section -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 pb-24">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+                    <!-- Left: Image Gallery (Stacked vertically) -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="bg-[#f5f4f2] aspect-square w-full flex items-center justify-center p-12 md:p-24 overflow-hidden">
+                            <img
+                                src="pictures/img1.png"
+                                alt="Тарелка Kintsugi, 28 см — Вид 1"
+                                class="product-cutout w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                        <div class="bg-[#f5f4f2] aspect-square w-full flex items-center justify-center p-12 md:p-24 overflow-hidden">
+                            <!-- Supplementary image showing layout (Bouquet Blu or Hybrid) to represent detailed views -->
+                            <img
+                                src="pictures/img3.png"
+                                alt="Тарелка Kintsugi, 28 см — Вид 2"
+                                class="product-cutout w-full h-full object-contain hover:scale-105 transition-transform duration-500"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Right: Product Info & Selectors (Sticky) -->
+                    <div class="lg:col-span-5">
+                        <div class="lg:sticky lg:top-36 space-y-8">
+                            <div>
+                                <p class="text-xs uppercase tracking-widest text-gray-400 mb-1">SELETTI</p>
+                                <h1 class="serif text-3xl md:text-4xl text-gray-900 font-medium leading-tight">
+                                    Тарелка Kintsugi, 28 см
+                                </h1>
+                                <div class="mt-4 flex items-baseline gap-4">
+                                    <span class="text-2xl font-semibold">10 200 ₽</span>
+                                </div>
+                                
+                                <!-- Dolyami Split Payment Badge -->
+                                <div class="mt-4 inline-flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-100 rounded-sm text-xs text-gray-600">
+                                    <span class="w-2 h-2 rounded-full bg-[#cc5500]"></span>
+                                    <span>4 платежа по <strong>2 550 ₽</strong> Долями</span>
+                                    <span class="text-gray-400 hover:text-black cursor-pointer ml-1" title="Оплата частями без переплат и процентов">?</span>
+                                </div>
+                            </div>
+
+                            <hr class="border-gray-100" />
+
+                            <!-- Product Attributes Selectors -->
+                            <div class="space-y-6">
+                                <!-- Color Selector -->
+                                <div x-data="{ selectedColor: 'Gold' }">
+                                    <label class="block text-[11px] uppercase tracking-wider text-gray-400 mb-3">
+                                        Декор / Окантовка: <span class="text-gray-900 font-medium" x-text="selectedColor"></span>
+                                    </label>
+                                    <div class="flex gap-3">
+                                        <button
+                                            @click="selectedColor = 'Gold'"
+                                            class="w-8 h-8 rounded-full border flex items-center justify-center transition-all"
+                                            :class="selectedColor === 'Gold' ? 'border-black p-0.5' : 'border-transparent hover:border-gray-300'"
+                                        >
+                                            <span class="w-full h-full rounded-full bg-[#d4af37]"></span>
+                                        </button>
+                                        <button
+                                            @click="selectedColor = 'Silver'"
+                                            class="w-8 h-8 rounded-full border flex items-center justify-center transition-all"
+                                            :class="selectedColor === 'Silver' ? 'border-black p-0.5' : 'border-transparent hover:border-gray-300'"
+                                        >
+                                            <span class="w-full h-full rounded-full bg-[#c0c0c0]"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Size Selector -->
+                                <div>
+                                    <label class="block text-[11px] uppercase tracking-wider text-gray-400 mb-3">
+                                        Размер диаметра
+                                    </label>
+                                    <div class="relative w-full">
+                                        <select class="w-full bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none appearance-none focus:outline-none focus:border-black cursor-pointer">
+                                            <option>28 см (в наличии)</option>
+                                            <option>22 см (под заказ)</option>
+                                            <option>18 см (нет в наличии)</option>
+                                        </select>
+                                        <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-gray-400">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Express Toggle -->
+                                <div x-data="{ express: false }" class="flex items-center justify-between p-4 bg-gray-50 border border-gray-100">
+                                    <div class="flex gap-3">
+                                        <svg class="w-5 h-5 text-gray-400 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.003-1.184l.808-11.772A1.125 1.125 0 014.183 5.25h15.634a1.125 1.125 0 011.003 1.184l-.808 11.772a1.125 1.125 0 01-1.003 1.184M7.5 10.5h6m-6 3h6m3-6h3m-3 3h3" />
+                                        </svg>
+                                        <div>
+                                            <p class="text-xs font-medium text-gray-900">Экспресс-доставка</p>
+                                            <p class="text-[10px] text-gray-500">Доставка сегодня курьером или самовывоз</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        @click="express = !express"
+                                        class="w-10 h-6 rounded-full p-1 transition-colors duration-200 focus:outline-none"
+                                        :class="express ? 'bg-[#1a1a1a]' : 'bg-gray-200'"
+                                    >
+                                        <div
+                                            class="bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200"
+                                            :class="express ? 'translate-x-4' : 'translate-x-0'"
+                                        ></div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Cart Add & Wishlist -->
+                            <div class="flex gap-4">
+                                <button
+                                    @click="cartCount++; alert('Товар добавлен в корзину');"
+                                    class="flex-grow bg-[#1a1a1a] text-white py-4 text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black transition-colors"
+                                >
+                                    Добавить в корзину
+                                </button>
+                                <button
+                                    @click="wishlistOpen = true"
+                                    class="w-14 border border-gray-200 hover:border-black flex items-center justify-center transition-colors"
+                                >
+                                    <svg
+                                        class="w-5 h-5 text-gray-600"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="1.5"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- Accordion details (inspired by Reference 3) -->
+                            <div x-data="{ activeTab: null }" class="border-t border-gray-100">
+                                <!-- Tab 1 -->
+                                <div class="border-b border-gray-100">
+                                    <button
+                                        @click="activeTab = (activeTab === 1 ? null : 1)"
+                                        class="w-full py-4 flex justify-between items-center text-xs uppercase tracking-wider font-medium text-gray-900"
+                                    >
+                                        <span>Описание товара</span>
+                                        <svg
+                                            class="w-4 h-4 transform transition-transform"
+                                            :class="activeTab === 1 ? 'rotate-180' : ''"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        x-show="activeTab === 1"
+                                        x-collapse
+                                        class="pb-5 text-xs text-gray-500 leading-relaxed"
+                                    >
+                                        <p class="mb-2">Артикул: <span class="text-gray-900">129311</span></p>
+                                        Коллекция посуды Kintsugi от итальянского бренда Seletti олицетворяет древнюю японскую технику реставрации фарфора с помощью золотого шва. Каждый скол и трещина подчеркивают уникальность предмета и наполняют его историей. Фарфоровая тарелка с золотыми акцентами добавит изысканности любой сервировке стола.
+                                    </div>
+                                </div>
+
+                                <!-- Tab 2 -->
+                                <div class="border-b border-gray-100">
+                                    <button
+                                        @click="activeTab = (activeTab === 2 ? null : 2)"
+                                        class="w-full py-4 flex justify-between items-center text-xs uppercase tracking-wider font-medium text-gray-900"
+                                    >
+                                        <span>Наличие в магазинах</span>
+                                        <svg
+                                            class="w-4 h-4 transform transition-transform"
+                                            :class="activeTab === 2 ? 'rotate-180' : ''"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        x-show="activeTab === 2"
+                                        x-collapse
+                                        class="pb-5 text-xs text-gray-500 space-y-3"
+                                    >
+                                        <div class="flex justify-between">
+                                            <span>Шоурум на Большой Никитской</span>
+                                            <span class="text-emerald-600 font-medium">В наличии</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Бутик в Санкт-Петербурге</span>
+                                            <span class="text-emerald-600 font-medium">Осталось 2 шт.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab 3 -->
+                                <div class="border-b border-gray-100">
+                                    <button
+                                        @click="activeTab = (activeTab === 3 ? null : 3)"
+                                        class="w-full py-4 flex justify-between items-center text-xs uppercase tracking-wider font-medium text-gray-900"
+                                    >
+                                        <span>Состав и уход</span>
+                                        <svg
+                                            class="w-4 h-4 transform transition-transform"
+                                            :class="activeTab === 3 ? 'rotate-180' : ''"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                    <div
+                                        x-show="activeTab === 3"
+                                        x-collapse
+                                        class="pb-5 text-xs text-gray-500 space-y-2 leading-relaxed"
+                                    >
+                                        <p><strong>Состав:</strong> 100% высококачественный костяной фарфор, сусальное золото 24К.</p>
+                                        <p><strong>Уход:</strong> Рекомендуется ручная мойка мягким моющим средством. Не использовать в микроволновой печи и посудомоечной машине во избежание повреждения позолоты.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cross-Sell Section: "Customers also viewed" (inspired by Reference 1) -->
+            <section class="border-t border-gray-100 pt-20 pb-16 bg-[#ffffff]">
+                <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                    <h3 class="serif text-2xl md:text-3xl text-gray-900 mb-10 font-normal">
+                        Клиенты также смотрят
+                    </h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Recommendation Card 1 -->
+                        <a href="product.html" class="group flex flex-col">
+                            <div class="bg-[#f5f4f2] aspect-square w-full mb-4 flex items-center justify-center p-8 overflow-hidden relative">
+                                <img
+                                    src="pictures/img2.png"
+                                    alt="Чашка с блюдцем Bouquet Blu"
+                                    class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                                />
+                            </div>
+                            <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-1">Richard Ginori</h4>
+                            <p class="text-sm font-medium text-gray-900 group-hover:underline">Чашка с блюдцем Bouquet Blu</p>
+                            <p class="text-sm font-medium mt-2">12 400 ₽</p>
+                        </a>
+
+                        <!-- Recommendation Card 2 -->
+                        <a href="product.html" class="group flex flex-col">
+                            <div class="bg-[#f5f4f2] aspect-square w-full mb-4 flex items-center justify-center p-8 overflow-hidden relative">
+                                <span class="absolute top-4 left-4 bg-red-500 text-white text-[9px] uppercase tracking-wider px-2 py-0.5">Sale</span>
+                                <img
+                                    src="pictures/img5.png"
+                                    alt="Тарелка Oriente Italiano"
+                                    class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                                />
+                            </div>
+                            <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-1">Richard Ginori</h4>
+                            <p class="text-sm font-medium text-gray-900 group-hover:underline">Тарелка Oriente Italiano, 26 см</p>
+                            <p class="text-sm font-medium mt-2 flex gap-2">
+                                <span class="text-red-500">11 200 ₽</span>
+                                <span class="text-gray-400 line-through text-xs">14 000 ₽</span>
+                            </p>
+                        </a>
+
+                        <!-- Recommendation Card 3 -->
+                        <a href="product.html" class="group flex flex-col">
+                            <div class="bg-[#f5f4f2] aspect-square w-full mb-4 flex items-center justify-center p-8 overflow-hidden relative">
+                                <img
+                                    src="pictures/img6.png"
+                                    alt="Салатник Ecume"
+                                    class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                                />
+                            </div>
+                            <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-1">Bernardaud</h4>
+                            <p class="text-sm font-medium text-gray-900 group-hover:underline">Салатник Ecume, 19 см</p>
+                            <p class="text-sm font-medium mt-2">18 900 ₽</p>
+                        </a>
+
+                        <!-- Recommendation Card 4 -->
+                        <a href="product.html" class="group flex flex-col">
+                            <div class="bg-[#f5f4f2] aspect-square w-full mb-4 flex items-center justify-center p-8 overflow-hidden relative">
+                                <img
+                                    src="pictures/img4.png"
+                                    alt="Тарелка обеденная Hybrid"
+                                    class="product-cutout w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                                />
+                            </div>
+                            <h4 class="text-xs uppercase tracking-widest text-gray-400 mb-1">Seletti</h4>
+                            <p class="text-sm font-medium text-gray-900 group-hover:underline">Тарелка обеденная Hybrid</p>
+                            <p class="text-sm font-medium mt-2">9 800 ₽</p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter Subscription (inspired by Reference 1) -->
+            <section class="border-t border-gray-100 bg-[#f5f4f2] py-20 text-center">
+                <div class="max-w-xl mx-auto px-6">
+                    <h3 class="serif text-3xl md:text-4xl mb-4 text-gray-900">
+                        Подпишитесь на рассылку
+                    </h3>
+                    <p class="text-xs text-gray-500 tracking-wider uppercase mb-8">
+                        Получите скидку 10% на первый заказ и доступ к закрытым коллекциям
+                    </p>
+                    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                        <input
+                            type="email"
+                            placeholder="Email Address"
+                            required
+                            class="flex-grow bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black"
+                        />
+                        <button
+                            type="submit"
+                            class="bg-[#1a1a1a] text-white px-8 py-3 text-xs uppercase tracking-wider font-semibold hover:bg-black transition-colors rounded-none whitespace-nowrap"
+                        >
+                            Подписаться
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-[#f5f4f2] pt-16 pb-8 border-t border-gray-200">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <!-- Col 1 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Покупателям</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="delivery.html" class="hover:text-black transition-colors">Доставка и оплата</a></li>
+                            <li><a href="returns.html" class="hover:text-black transition-colors">Обмен и возврат</a></li>
+                            <li><a href="giftcards.html" class="hover:text-black transition-colors">Подарочные сертификаты</a></li>
+                            <li><a href="#" class="hover:text-black transition-colors">Программа лояльности</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 2 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">О компании</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="about.html" class="hover:text-black transition-colors">О бренде</a></li>
+                            <li><a href="contacts.html#stores" class="hover:text-black transition-colors">Наши магазины</a></li>
+                            <li><a href="collab.html" class="hover:text-black transition-colors">Сотрудничество (B2B)</a></li>
+                            <li><a href="contacts.html" class="hover:text-black transition-colors">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 3 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Контакты</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="tel:+78005553535" class="text-black font-medium text-sm">+7 (800) 555-35-35</a></li>
+                            <li>Ежедневно с 10:00 до 21:00</li>
+                            <li><a href="mailto:hello@sixpersons.ru" class="hover:text-black transition-colors underline">hello@sixpersons.ru</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 4 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Бутик SIX PERSONS</h5>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Москва, ул. Большая Никитская, 24/1с5<br />
+                            Ежедневно с 10:00 до 22:00
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest">
+                    <p>&copy; 2026 SIX PERSONS.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-black transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Wishlist Sidebar Drawer -->
+        <div x-show="wishlistOpen" x-cloak class="fixed inset-0 z-[100] flex justify-end">
+            <div x-show="wishlistOpen" @click="wishlistOpen = false" x-transition.opacity class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+            <div x-show="wishlistOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" class="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col">
+                <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                    <h2 class="serif text-2xl">Избранное (1)</h2>
+                    <button @click="wishlistOpen = false" class="text-gray-400 hover:text-black">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex-grow overflow-y-auto p-6">
+                    <div class="flex gap-4">
+                        <div class="w-24 h-24 bg-[#f5f4f2] flex items-center justify-center p-2 flex-shrink-0">
+                            <img src="pictures/img1.png" class="product-cutout w-full h-full object-contain" />
+                        </div>
+                        <div class="flex-grow flex flex-col justify-center">
+                            <h4 class="text-sm font-medium">Тарелка Kintsugi, 28 см</h4>
+                            <p class="text-xs text-gray-500 mb-2">Seletti</p>
+                            <span class="text-sm font-medium">10 200 ₽</span>
+                        </div>
+                        <button class="text-gray-400 hover:text-red-500 h-fit mt-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6 border-t border-gray-100 bg-gray-50">
+                    <button class="w-full bg-white border border-black text-black py-3 text-[11px] uppercase tracking-[0.1em] font-medium hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2">
+                        Поделиться вишлистом
+                    </button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

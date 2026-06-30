@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Оформление заказа — SIX PERSONS</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            @font-face {
+                font-family: "Albertus Nova";
+                src: local("Albertus Nova");
+                font-weight: normal;
+                font-style: normal;
+            }
+            :root {
+                --bg-gray: #f5f4f2;
+                --text-dark: #1a1a1a;
+                --text-muted: #717171;
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                color: var(--text-dark);
+                background-color: #ffffff;
+                -webkit-font-smoothing: antialiased;
+            }
+            .serif {
+                font-family: "Cormorant Garamond", serif;
+            }
+            .logo-font {
+                font-family: "Albertus Nova", "Cormorant Garamond", serif;
+                letter-spacing: 0.05em;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            [x-cloak] {
+                display: none !important;
+            }
+            .product-cutout {
+                mix-blend-mode: multiply;
+            }
+        </style>
+    </head>
+    <body
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false, deliveryMethod: 'courier', deliveryFee: 590, paymentMethod: 'card', itemsSubtotal: 10200, discount: 0 }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+    >
+        <!-- Header (Westwing Minimal Style) -->
+        <header
+            class="fixed top-0 w-full z-50 transition-all duration-300 border-b bg-white text-black border-gray-200 py-5"
+        >
+            <div
+                class="max-w-[1600px] mx-auto px-6 md:px-10 flex justify-between items-start md:items-center flex-col md:flex-row gap-5 md:gap-0"
+            >
+                <!-- Left: Logo & Nav -->
+                <div class="flex flex-col gap-6">
+                    <a href="index.html" class="block">
+                        <img src="logo-01.svg" class="h-8 md:h-9 w-auto" alt="SIX PERSONS" />
+                    </a>
+                    <nav
+                        class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
+                    >
+                        <a href="index.html" class="hover:opacity-70 transition-opacity">Главная</a>
+                        <a href="catalog.html" class="hover:opacity-70 transition-opacity">Каталог</a>
+                        <a href="catalog.html?category=brands" class="hover:opacity-70 transition-opacity">Бренды</a>
+                        <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity">Outdoor</a>
+                        <a href="catalog.html?category=deals" class="hover:opacity-70 transition-opacity">Deals</a>
+                        <a href="collab.html" class="hover:opacity-70 transition-opacity">Сотрудничество</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Icons (simplified for Checkout) -->
+                <div class="flex items-center gap-6 text-xs text-gray-400 uppercase tracking-widest">
+                    <span>Безопасная оплата</span>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <main class="pt-32">
+            <!-- Breadcrumbs -->
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10 py-6 text-xs text-gray-400 uppercase tracking-widest">
+                <a href="index.html" class="hover:text-black transition-colors">Главная</a>
+                <span class="mx-2">/</span>
+                <a href="cart.html" class="hover:text-black transition-colors">Корзина</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-900">Оформление заказа</span>
+            </div>
+
+            <!-- Checkout Section -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 pb-24">
+                <h1 class="serif text-3xl md:text-4xl mb-12 text-gray-900 tracking-wide">
+                    Оформление заказа
+                </h1>
+
+                <form @submit.prevent="alert('Заказ успешно оформлен! Спасибо за покупку в SIX PERSONS.'); window.location.href='index.html';" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+                    
+                    <!-- Left: Delivery Details & Fields Form -->
+                    <div class="lg:col-span-8 space-y-10">
+                        
+                        <!-- Block 1: Contact info -->
+                        <div class="space-y-6">
+                            <h2 class="text-xs uppercase tracking-[0.15em] font-semibold text-gray-900 border-b border-gray-100 pb-3">
+                                1. Контактная информация
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Email Address *</label>
+                                    <input type="email" required placeholder="example@mail.ru" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Номер телефона *</label>
+                                    <input type="tel" required placeholder="+7 (___) ___-__-__" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Имя *</label>
+                                    <input type="text" required placeholder="Иван" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Фамилия *</label>
+                                    <input type="text" required placeholder="Иванов" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Block 2: Shipping method -->
+                        <div class="space-y-6">
+                            <h2 class="text-xs uppercase tracking-[0.15em] font-semibold text-gray-900 border-b border-gray-100 pb-3">
+                                2. Способ доставки
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Courier card option -->
+                                <label
+                                    @click="deliveryMethod = 'courier'; deliveryFee = 590"
+                                    class="border p-5 flex items-start gap-4 cursor-pointer hover:border-black transition-colors"
+                                    :class="deliveryMethod === 'courier' ? 'border-black bg-gray-50' : 'border-gray-200'"
+                                >
+                                    <input type="radio" name="delivery" checked class="mt-1 text-black focus:ring-black" />
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-900 uppercase tracking-wider">Курьерская доставка</p>
+                                        <p class="text-[11px] text-gray-500 mt-1">До двери, СДЭК / Спецкурьер</p>
+                                        <p class="text-xs font-semibold text-gray-900 mt-3">590 ₽ (1-3 дня)</p>
+                                    </div>
+                                </label>
+
+                                <!-- Pickup card option -->
+                                <label
+                                    @click="deliveryMethod = 'pickup'; deliveryFee = 0"
+                                    class="border p-5 flex items-start gap-4 cursor-pointer hover:border-black transition-colors"
+                                    :class="deliveryMethod === 'pickup' ? 'border-black bg-gray-50' : 'border-gray-200'"
+                                >
+                                    <input type="radio" name="delivery" class="mt-1 text-black focus:ring-black" />
+                                    <div>
+                                        <p class="text-xs font-semibold text-gray-900 uppercase tracking-wider">Самовывоз из шоурума</p>
+                                        <p class="text-[11px] text-gray-500 mt-1">Москва, Большая Никитская, 24</p>
+                                        <p class="text-xs font-semibold text-emerald-600 mt-3">Бесплатно (сегодня)</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Block 3: Delivery Address (conditional on courier) -->
+                        <div x-show="deliveryMethod === 'courier'" x-collapse class="space-y-6">
+                            <h2 class="text-xs uppercase tracking-[0.15em] font-semibold text-gray-900 border-b border-gray-100 pb-3">
+                                3. Адрес доставки
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="md:col-span-3 flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Улица *</label>
+                                    <input type="text" :required="deliveryMethod === 'courier'" placeholder="Большая Никитская" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Дом *</label>
+                                    <input type="text" :required="deliveryMethod === 'courier'" placeholder="24" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Квартира / Офис</label>
+                                    <input type="text" placeholder="12" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Индекс</label>
+                                    <input type="text" placeholder="125009" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Block 4: Delivery Date & Time Slot -->
+                        <div x-show="deliveryMethod === 'courier'" x-collapse class="space-y-6">
+                            <h2 class="text-xs uppercase tracking-[0.15em] font-semibold text-gray-900 border-b border-gray-100 pb-3">
+                                4. Дата и время доставки
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Желаемая дата</label>
+                                    <input type="date" class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <label class="text-[11px] uppercase tracking-wider text-gray-500">Интервал времени</label>
+                                    <select class="bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black appearance-none cursor-pointer">
+                                        <option>Любое время с 10:00 до 21:00</option>
+                                        <option>Утро (10:00 - 14:00)</option>
+                                        <option>День (14:00 - 18:00)</option>
+                                        <option>Вечер (18:00 - 21:00)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Block 5: Payment method -->
+                        <div class="space-y-6">
+                            <h2 class="text-xs uppercase tracking-[0.15em] font-semibold text-gray-900 border-b border-gray-100 pb-3">
+                                5. Способ оплаты
+                            </h2>
+                            <div class="space-y-3">
+                                <!-- Option card online -->
+                                <label
+                                    @click="paymentMethod = 'card'"
+                                    class="border p-4 flex items-center justify-between cursor-pointer hover:border-black transition-colors"
+                                    :class="paymentMethod === 'card' ? 'border-black bg-gray-50' : 'border-gray-200'"
+                                >
+                                    <div class="flex items-center gap-3">
+                                        <input type="radio" name="payment" checked class="text-black focus:ring-black" />
+                                        <span class="text-xs font-medium uppercase tracking-wider">Банковской картой онлайн</span>
+                                    </div>
+                                    <span class="text-[10px] text-gray-400">Visa, Mastercard, Mir</span>
+                                </label>
+
+                                <!-- Option SBP -->
+                                <label
+                                    @click="paymentMethod = 'sbp'"
+                                    class="border p-4 flex items-center justify-between cursor-pointer hover:border-black transition-colors"
+                                    :class="paymentMethod === 'sbp' ? 'border-black bg-gray-50' : 'border-gray-200'"
+                                >
+                                    <div class="flex items-center gap-3">
+                                        <input type="radio" name="payment" class="text-black focus:ring-black" />
+                                        <span class="text-xs font-medium uppercase tracking-wider">Система быстрых платежей (СБП)</span>
+                                    </div>
+                                    <span class="text-[10px] text-gray-400">Оплата по QR-коду</span>
+                                </label>
+
+                                <!-- Option Dolyami -->
+                                <label
+                                    @click="paymentMethod = 'dolyami'"
+                                    class="border p-4 flex items-center justify-between cursor-pointer hover:border-black transition-colors"
+                                    :class="paymentMethod === 'dolyami' ? 'border-black bg-gray-50' : 'border-gray-200'"
+                                >
+                                    <div class="flex items-center gap-3">
+                                        <input type="radio" name="payment" class="text-black focus:ring-black" />
+                                        <span class="text-xs font-medium uppercase tracking-wider">Долями (Оплата частями)</span>
+                                    </div>
+                                    <span class="text-[10px] text-emerald-600 font-semibold">4 платежа без переплат</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Block 6: Courier Comment -->
+                        <div class="space-y-4">
+                            <label class="text-[11px] uppercase tracking-wider text-gray-500 block">Комментарий для курьера</label>
+                            <textarea placeholder="Например, код домофона или номер подъезда..." rows="3" class="w-full bg-white border border-gray-200 px-4 py-3 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Right: Sticky Order Summary Box -->
+                    <div class="lg:col-span-4 bg-gray-50 border border-gray-100 p-8 space-y-6 lg:sticky lg:top-36">
+                        <h2 class="serif text-xl font-medium text-gray-900 pb-2 border-b border-gray-200">Ваш заказ</h2>
+                        
+                        <!-- Order item preview -->
+                        <div class="space-y-4 max-h-48 overflow-y-auto pr-2">
+                            <div class="flex gap-4 items-center">
+                                <div class="w-16 h-16 bg-[#f5f4f2] flex items-center justify-center p-2 flex-shrink-0">
+                                    <img src="pictures/img1.png" class="product-cutout w-full h-full object-contain" />
+                                </div>
+                                <div class="flex-grow">
+                                    <h4 class="text-xs font-medium text-gray-900 leading-snug">Тарелка Kintsugi, 28 см</h4>
+                                    <p class="text-[10px] text-gray-400 mt-0.5">Seletti / Золото / 1 шт.</p>
+                                </div>
+                                <span class="text-xs font-semibold">10 200 ₽</span>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-200" />
+
+                        <!-- Price calculation -->
+                        <div class="space-y-3 text-xs">
+                            <div class="flex justify-between text-gray-500">
+                                <span>Товары</span>
+                                <span class="font-medium text-gray-900">10 200 ₽</span>
+                            </div>
+                            <div class="flex justify-between text-gray-500">
+                                <span>Доставка</span>
+                                <span class="font-medium text-gray-900" x-text="deliveryFee === 0 ? 'Бесплатно' : deliveryFee + ' ₽'">590 ₽</span>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-200" />
+
+                        <!-- Final amount -->
+                        <div class="flex justify-between text-sm font-semibold">
+                            <span>Итого к оплате</span>
+                            <span class="text-lg" x-text="(itemsSubtotal + deliveryFee).toLocaleString('ru-RU') + ' ₽'">10 790 ₽</span>
+                        </div>
+
+                        <!-- Submit button -->
+                        <button
+                            type="submit"
+                            class="w-full bg-[#1a1a1a] text-white py-4 text-center text-[11px] uppercase tracking-[0.15em] font-medium hover:bg-black transition-colors rounded-none"
+                        >
+                            Оплатить заказ
+                        </button>
+
+                        <div class="text-[10px] text-gray-400 text-center uppercase tracking-wider mt-4 leading-relaxed">
+                            Нажимая кнопку, вы соглашаетесь с условиями <a href="delivery.html" class="underline hover:text-black">доставки</a> и <a href="returns.html" class="underline hover:text-black">возврата</a>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </main>
+
+        <footer class="bg-[#f5f4f2] pt-16 pb-8 border-t border-gray-200">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <!-- Col 1 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Покупателям</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="delivery.html" class="hover:text-black transition-colors">Доставка и оплата</a></li>
+                            <li><a href="returns.html" class="hover:text-black transition-colors">Обмен и возврат</a></li>
+                            <li><a href="giftcards.html" class="hover:text-black transition-colors">Подарочные сертификаты</a></li>
+                            <li><a href="#" class="hover:text-black transition-colors">Программа лояльности</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 2 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">О компании</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="about.html" class="hover:text-black transition-colors">О бренде</a></li>
+                            <li><a href="contacts.html#stores" class="hover:text-black transition-colors">Наши магазины</a></li>
+                            <li><a href="collab.html" class="hover:text-black transition-colors">Сотрудничество (B2B)</a></li>
+                            <li><a href="contacts.html" class="hover:text-black transition-colors">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 3 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Контакты</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="tel:+78005553535" class="text-black font-medium text-sm">+7 (800) 555-35-35</a></li>
+                            <li>Ежедневно с 10:00 до 21:00</li>
+                            <li><a href="mailto:hello@sixpersons.ru" class="hover:text-black transition-colors underline">hello@sixpersons.ru</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 4 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Бутик SIX PERSONS</h5>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Москва, ул. Большая Никитская, 24/1с5<br />
+                            Ежедневно с 10:00 до 22:00
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest">
+                    <p>&copy; 2026 SIX PERSONS.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-black transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

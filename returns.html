@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Обмен и возврат — SIX PERSONS</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        }
+                    }
+                }
+            }
+        </script>
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            @font-face {
+                font-family: "Albertus Nova";
+                src: local("Albertus Nova");
+                font-weight: normal;
+                font-style: normal;
+            }
+            :root {
+                --bg-gray: #f5f4f2;
+                --text-dark: #1a1a1a;
+                --text-muted: #717171;
+            }
+            body {
+                font-family: "Inter", sans-serif;
+                color: var(--text-dark);
+                background-color: #ffffff;
+                -webkit-font-smoothing: antialiased;
+            }
+            .serif {
+                font-family: "Cormorant Garamond", serif;
+            }
+            .logo-font {
+                font-family: "Albertus Nova", "Cormorant Garamond", serif;
+                letter-spacing: 0.05em;
+            }
+            .hide-scrollbar::-webkit-scrollbar {
+                display: none;
+            }
+            .hide-scrollbar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            [x-cloak] {
+                display: none !important;
+            }
+            .product-cutout {
+                mix-blend-mode: multiply;
+            }
+        </style>
+    </head>
+    <body
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false }"
+        @scroll.window="scrolled = (window.pageYOffset > 50)"
+    >
+        <!-- Header (Westwing Minimal Style) -->
+        <header
+            class="fixed top-0 w-full z-50 transition-all duration-300 border-b bg-white text-black border-gray-200 py-5"
+        >
+            <div
+                class="max-w-[1600px] mx-auto px-6 md:px-10 flex justify-between items-start md:items-center flex-col md:flex-row gap-5 md:gap-0"
+            >
+                <!-- Left: Logo & Nav -->
+                <div class="flex flex-col gap-6">
+                    <a href="index.html" class="block">
+                        <img src="logo-01.svg" class="h-8 md:h-9 w-auto" alt="SIX PERSONS" />
+                    </a>
+                    <nav
+                        class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
+                    >
+                        <a href="index.html" class="hover:opacity-70 transition-opacity">Главная</a>
+                        <a href="catalog.html" class="hover:opacity-70 transition-opacity">Каталог</a>
+                        <a href="catalog.html?category=brands" class="hover:opacity-70 transition-opacity">Бренды</a>
+                        <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity">Outdoor</a>
+                        <a href="catalog.html?category=deals" class="hover:opacity-70 transition-opacity">Deals</a>
+                        <a href="collab.html" class="hover:opacity-70 transition-opacity">Сотрудничество</a>
+                    </nav>
+                </div>
+
+                <!-- Right: Search & Icons -->
+                <div
+                    class="flex items-center gap-10 w-full md:w-auto justify-between md:justify-end"
+                >
+                    <!-- Search Bar -->
+                    <div
+                        class="relative flex items-center border-b pb-1.5 w-full md:w-72 border-gray-300"
+                    >
+                        <input
+                            type="text"
+                            placeholder="Поиск по товарам"
+                            class="bg-transparent border-none outline-none text-sm w-full placeholder-current opacity-80 focus:ring-0 px-0"
+                        />
+                        <button class="hover:opacity-70">
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Icons -->
+                    <div class="flex items-center gap-6">
+                        <a href="#" class="hover:opacity-70 transition-opacity">
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                                />
+                            </svg>
+                        </a>
+                        <button
+                            @click="wishlistOpen = true"
+                            class="hover:opacity-70 transition-opacity relative"
+                        >
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                                />
+                            </svg>
+                            <span
+                                class="absolute -top-1 -right-2 text-[9px] bg-red-500 text-white w-3.5 h-3.5 rounded-full flex items-center justify-center"
+                                >1</span
+                            >
+                        </button>
+                        <a href="cart.html" class="hover:opacity-70 transition-opacity relative">
+                            <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="pt-32">
+            <!-- Breadcrumbs -->
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10 py-6 text-xs text-gray-400 uppercase tracking-widest">
+                <a href="index.html" class="hover:text-black transition-colors">Главная</a>
+                <span class="mx-2">/</span>
+                <span class="text-gray-900">Обмен и возврат</span>
+            </div>
+
+            <!-- Returns & Exchanges Section -->
+            <section class="max-w-[1600px] mx-auto px-6 md:px-10 pb-24">
+                <div class="max-w-3xl mx-auto space-y-12">
+                    <h1 class="serif text-3.5xl md:text-4.5xl mb-12 text-gray-900 tracking-wide text-center">
+                        Обмен и возврат
+                    </h1>
+
+                    <div class="prose prose-sm text-xs text-gray-500 leading-relaxed space-y-6 font-light">
+                        <p class="text-sm text-gray-700">
+                            Мы стремимся к тому, чтобы каждая покупка в бутике SIX PERSONS радовала вас. Однако, если товар вам не подошел, вы можете вернуть или обменять его в течение <strong>14 календарных дней</strong> с момента получения заказа.
+                        </p>
+                        
+                        <div class="w-full h-px bg-gray-100 my-8"></div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Условия возврата товара надлежащего качества</h3>
+                            <p>
+                                Возврат возможен при соблюдении следующих условий:
+                            </p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Товар не был в употреблении (нет следов использования, сколов, трещин, царапин).</li>
+                                <li>Сохранен товарный вид, оригинальная фирменная упаковка, бирки, пломбы и этикетки.</li>
+                                <li>Имеются документы, подтверждающие факт покупки в нашем магазине (электронный чек или номер заказа).</li>
+                            </ul>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Как осуществить возврат: пошаговая инструкция</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                                <div class="p-6 bg-gray-50 border border-gray-100 space-y-3">
+                                    <span class="text-xl font-serif text-gray-400">Шаг 01</span>
+                                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Заполните заявление</h4>
+                                    <p class="text-[11px] text-gray-500">Напишите нам на <a href="mailto:hello@sixpersons.ru" class="underline">hello@sixpersons.ru</a> с указанием номера заказа и причины возврата.</p>
+                                </div>
+                                <div class="p-6 bg-gray-50 border border-gray-100 space-y-3">
+                                    <span class="text-xl font-serif text-gray-400">Шаг 02</span>
+                                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Упакуйте товар</h4>
+                                    <p class="text-[11px] text-gray-500">Тщательно упакуйте хрупкие изделия в пузырчатую пленку и оригинальную коробку во избежание повреждений.</p>
+                                </div>
+                                <div class="p-6 bg-gray-50 border border-gray-100 space-y-3">
+                                    <span class="text-xl font-serif text-gray-400">Шаг 03</span>
+                                    <h4 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Отправьте нам</h4>
+                                    <p class="text-[11px] text-gray-500">Верните самостоятельно в шоурум в Москве или отправьте курьерской службой СДЭК по согласованию.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-xs uppercase tracking-wider font-semibold text-gray-900">Возврат денежных средств</h3>
+                            <p>
+                                Мы переведем денежные средства на ту же банковскую карту, с которой производилась оплата, в течение <strong>3-10 рабочих дней</strong> с момента получения и проверки возвращенного товара нашими сотрудниками. Скорость зачисления зависит от вашего банка-эмитента.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-[#f5f4f2] pt-16 pb-8 border-t border-gray-200">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <!-- Col 1 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Покупателям</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="delivery.html" class="hover:text-black transition-colors">Доставка и оплата</a></li>
+                            <li><a href="returns.html" class="hover:text-black transition-colors">Обмен и возврат</a></li>
+                            <li><a href="giftcards.html" class="hover:text-black transition-colors">Подарочные сертификаты</a></li>
+                            <li><a href="#" class="hover:text-black transition-colors">Программа лояльности</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 2 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">О компании</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="about.html" class="hover:text-black transition-colors">О бренде</a></li>
+                            <li><a href="contacts.html#stores" class="hover:text-black transition-colors">Наши магазины</a></li>
+                            <li><a href="collab.html" class="hover:text-black transition-colors">Сотрудничество (B2B)</a></li>
+                            <li><a href="contacts.html" class="hover:text-black transition-colors">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 3 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Контакты</h5>
+                        <ul class="space-y-4 text-xs text-gray-500">
+                            <li><a href="tel:+78005553535" class="text-black font-medium text-sm">+7 (800) 555-35-35</a></li>
+                            <li>Ежедневно с 10:00 до 21:00</li>
+                            <li><a href="mailto:hello@sixpersons.ru" class="hover:text-black transition-colors underline">hello@sixpersons.ru</a></li>
+                        </ul>
+                    </div>
+                    <!-- Col 4 -->
+                    <div>
+                        <h5 class="text-[11px] uppercase tracking-[0.15em] font-semibold mb-6 text-gray-900">Бутик SIX PERSONS</h5>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Москва, ул. Большая Никитская, 24/1с5<br />
+                            Ежедневно с 10:00 до 22:00
+                        </p>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-400 uppercase tracking-widest">
+                    <p>&copy; 2026 SIX PERSONS.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="hover:text-black transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-black transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

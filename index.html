@@ -69,7 +69,7 @@
         </style>
     </head>
     <body
-        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false }"
+        x-data="{ scrolled: false, wishlistOpen: false, searchOpen: false, showroomOpen: false, loyaltyOpen: false }"
         @scroll.window="scrolled = (window.pageYOffset > 50)"
     >
         <!-- Header (Westwing Minimal Style) -->
@@ -88,22 +88,22 @@
                     <nav
                         class="hidden md:flex gap-10 text-[12px] tracking-[0.15em] uppercase font-medium"
                     >
-                        <a href="#" class="hover:opacity-70 transition-opacity"
+                        <a href="catalog.html?category=new" class="hover:opacity-70 transition-opacity"
                             >Новинки</a
                         >
                         <a href="catalog.html" class="hover:opacity-70 transition-opacity"
                             >Каталог</a
                         >
-                        <a href="#" class="hover:opacity-70 transition-opacity"
+                        <a href="catalog.html?category=brands" class="hover:opacity-70 transition-opacity"
                             >Бренды</a
                         >
-                        <a href="#" class="hover:opacity-70 transition-opacity"
+                        <a href="catalog.html?category=outdoor" class="hover:opacity-70 transition-opacity"
                             >Outdoor</a
                         >
-                        <a href="#" class="hover:opacity-70 transition-opacity"
+                        <a href="catalog.html?category=deals" class="hover:opacity-70 transition-opacity"
                             >Deals</a
                         >
-                        <a href="#" class="hover:opacity-70 transition-opacity"
+                        <a href="collab.html" class="hover:opacity-70 transition-opacity"
                             >Сотрудничество</a
                         >
                     </nav>
@@ -179,7 +179,7 @@
                                 >1</span
                             >
                         </button>
-                        <a href="#" class="hover:opacity-70 transition-opacity">
+                        <a href="cart.html" class="hover:opacity-70 transition-opacity">
                             <svg
                                 class="w-6 h-6"
                                 fill="none"
@@ -450,7 +450,7 @@
                         <p class="text-gray-500 text-xs uppercase tracking-widest mb-10 text-center lg:text-left">Элементы готового интерьерного решения</p>
                         <div class="grid grid-cols-2 gap-x-6 gap-y-10">
                             <!-- Product 1 -->
-                            <a href="catalog.html" class="group flex flex-col">
+                            <a href="product.html" class="group flex flex-col">
                                 <div class="aspect-square bg-[#f5f4f2] flex items-center justify-center p-6 mb-4 group-hover:bg-[#ebeae8] transition-colors relative overflow-hidden">
                                     <img src="pictures/img5.png" alt="Oriente Italiano" class="product-cutout w-[80%] h-[80%] object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
@@ -458,7 +458,7 @@
                                 <p class="text-sm font-medium text-gray-900">12 100 ₽</p>
                             </a>
                             <!-- Product 2 -->
-                            <a href="catalog.html" class="group flex flex-col">
+                            <a href="product.html" class="group flex flex-col">
                                 <div class="aspect-square bg-[#f5f4f2] flex items-center justify-center p-6 mb-4 group-hover:bg-[#ebeae8] transition-colors relative overflow-hidden">
                                     <img src="pictures/img1.png" alt="Kintsugi" class="product-cutout w-[80%] h-[80%] object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
@@ -466,7 +466,7 @@
                                 <p class="text-sm font-medium text-gray-900">10 200 ₽</p>
                             </a>
                             <!-- Product 3 -->
-                            <a href="catalog.html" class="group flex flex-col">
+                            <a href="product.html" class="group flex flex-col">
                                 <div class="aspect-square bg-[#f5f4f2] flex items-center justify-center p-6 mb-4 group-hover:bg-[#ebeae8] transition-colors relative overflow-hidden">
                                     <img src="pictures/img2.png" alt="Bouquet Blu" class="product-cutout w-[80%] h-[80%] object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
@@ -474,7 +474,7 @@
                                 <p class="text-sm font-medium text-gray-900">15 350 ₽</p>
                             </a>
                             <!-- Product 4 -->
-                            <a href="catalog.html" class="group flex flex-col">
+                            <a href="product.html" class="group flex flex-col">
                                 <div class="aspect-square bg-[#f5f4f2] flex items-center justify-center p-6 mb-4 group-hover:bg-[#ebeae8] transition-colors relative overflow-hidden">
                                     <img src="pictures/img6.png" alt="Ecume" class="product-cutout w-[80%] h-[80%] object-contain group-hover:scale-105 transition-transform duration-500" />
                                 </div>
@@ -497,7 +497,7 @@
                             <div>
                                 <h4 class="serif text-2xl md:text-3xl font-medium mb-3">Скидки</h4>
                                 <p class="text-xs text-white/80 font-light mb-6">Избранные коллекции фарфора и бокалов по специальным ценам.</p>
-                                <a href="catalog.html" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Смотреть товары</a>
+                                <a href="catalog.html?category=deals" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Смотреть товары</a>
                             </div>
                         </div>
                     </div>
@@ -509,7 +509,7 @@
                             <div>
                                 <h4 class="serif text-2xl md:text-3xl font-medium mb-3">Шоурум</h4>
                                 <p class="text-xs text-white/80 font-light mb-6">Запишитесь на индивидуальную консультацию и подбор сервировки вживую.</p>
-                                <a href="#" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Записаться</a>
+                                <a href="#" @click.prevent="showroomOpen = true" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Записаться</a>
                             </div>
                         </div>
                     </div>
@@ -521,7 +521,7 @@
                             <div>
                                 <h4 class="serif text-2xl md:text-3xl font-medium mb-3">Клуб привилегий</h4>
                                 <p class="text-xs text-white/80 font-light mb-6">Присоединяйтесь к закрытому клубу SIX PERSONS и получайте особые бонусы.</p>
-                                <a href="#" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Вступить в клуб</a>
+                                <a href="#" @click.prevent="loyaltyOpen = true" class="inline-block text-xs uppercase tracking-wider border-b border-white pb-0.5 hover:opacity-75 transition-opacity">Вступить в клуб</a>
                             </div>
                         </div>
                     </div>
@@ -567,21 +567,21 @@
                         <ul class="space-y-4 text-xs text-gray-500">
                             <li>
                                 <a
-                                    href="#"
+                                    href="delivery.html"
                                     class="hover:text-black transition-colors"
                                     >Доставка и оплата</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="returns.html"
                                     class="hover:text-black transition-colors"
                                     >Обмен и возврат</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="giftcards.html"
                                     class="hover:text-black transition-colors"
                                     >Подарочные сертификаты</a
                                 >
@@ -589,6 +589,7 @@
                             <li>
                                 <a
                                     href="#"
+                                    @click.prevent="loyaltyOpen = true"
                                     class="hover:text-black transition-colors"
                                     >Программа лояльности</a
                                 >
@@ -605,28 +606,28 @@
                         <ul class="space-y-4 text-xs text-gray-500">
                             <li>
                                 <a
-                                    href="#"
+                                    href="about.html"
                                     class="hover:text-black transition-colors"
                                     >О бренде</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="contacts.html#stores"
                                     class="hover:text-black transition-colors"
                                     >Наши магазины</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="collab.html"
                                     class="hover:text-black transition-colors"
                                     >Сотрудничество (B2B)</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    href="#"
+                                    href="contacts.html"
                                     class="hover:text-black transition-colors"
                                     >Контакты</a
                                 >
@@ -805,12 +806,96 @@
                                 d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
                             />
                         </svg>
-                        Поделиться вишлистом
-                    </button>
-                    <p class="text-[10px] text-center text-gray-500 mt-3">
-                        Отправьте публичную ссылку друзьям и близким
-                    </p>
                 </div>
+            </div>
+        </div>
+
+        <!-- Showroom Booking Modal -->
+        <div x-show="showroomOpen" x-cloak class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <div x-show="showroomOpen" @click="showroomOpen = false" x-transition.opacity class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            <div x-show="showroomOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="relative bg-white w-full max-w-lg p-8 md:p-12 shadow-2xl z-10 space-y-6 text-black">
+                <button @click="showroomOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="text-center">
+                    <h2 class="serif text-2xl md:text-3xl font-medium">Запись в Шоурум</h2>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wider">Индивидуальный подбор сервировки</p>
+                </div>
+                <form @submit.prevent="alert('Вы успешно записаны в шоурум! Мы свяжемся с вами для подтверждения времени.'); showroomOpen = false;" class="space-y-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Ваше имя *</label>
+                        <input type="text" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Номер телефона *</label>
+                        <input type="tel" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Дата *</label>
+                            <input type="date" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Время *</label>
+                            <select required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black appearance-none cursor-pointer">
+                                <option>10:00 - 12:00</option>
+                                <option>12:00 - 14:00</option>
+                                <option>14:00 - 16:00</option>
+                                <option>16:00 - 18:00</option>
+                                <option>18:00 - 20:00</option>
+                                <option>20:00 - 22:00</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Шоурум *</label>
+                        <select required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black appearance-none cursor-pointer">
+                            <option>Москва, ул. Большая Никитская, 24</option>
+                            <option>Санкт-Петербург, Невский проспект, 44</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-[#1a1a1a] text-white py-3.5 text-xs uppercase tracking-wider font-semibold hover:bg-black transition-colors rounded-none mt-2">
+                        Забронировать визит
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Loyalty Club Modal -->
+        <div x-show="loyaltyOpen" x-cloak class="fixed inset-0 z-[110] flex items-center justify-center p-4">
+            <div x-show="loyaltyOpen" @click="loyaltyOpen = false" x-transition.opacity class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+            <div x-show="loyaltyOpen" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100" class="relative bg-white w-full max-w-lg p-8 md:p-12 shadow-2xl z-10 space-y-6 text-black">
+                <button @click="loyaltyOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="text-center">
+                    <h2 class="serif text-2xl md:text-3xl font-medium">Клуб привилегий</h2>
+                    <p class="text-xs text-gray-400 mt-2 uppercase tracking-wider">Присоединяйтесь к SIX PERSONS Club</p>
+                </div>
+                <div class="text-xs text-gray-500 font-light space-y-2 leading-relaxed text-center max-w-sm mx-auto">
+                    Членство в клубе дает доступ к закрытым распродажам, скидке 10% на первый заказ и приглашениям на закрытые презентации коллекций в шоуруме.
+                </div>
+                <form @submit.prevent="alert('Добро пожаловать в клуб SIX PERSONS! Ваш промокод WELCOME10 на скидку 10% уже активен.'); loyaltyOpen = false;" class="space-y-4">
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Ваше имя *</label>
+                        <input type="text" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Email Address *</label>
+                        <input type="email" required class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <label class="text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Номер телефона *</label>
+                        <input type="tel" required placeholder="+7" class="w-full bg-white border border-gray-200 px-4 py-2.5 text-xs uppercase tracking-wider rounded-none outline-none focus:border-black" />
+                    </div>
+                    <button type="submit" class="w-full bg-[#1a1a1a] text-white py-3.5 text-xs uppercase tracking-wider font-semibold hover:bg-black transition-colors rounded-none mt-2">
+                        Вступить в клуб
+                    </button>
+                </form>
             </div>
         </div>
     </body>
